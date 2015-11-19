@@ -63,7 +63,8 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jButton2"/>
+        <Property name="text" type="java.lang.String" value="Bye Felicia "/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>
   </SubComponents>

@@ -36,7 +36,8 @@ public class GUI extends javax.swing.JFrame {
 
         jButton1.setText("Push to be happy!");
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Bye Felicia ");
+        jButton2.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
