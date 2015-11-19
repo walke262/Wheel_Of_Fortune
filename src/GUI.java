@@ -26,18 +26,18 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        lblExample = new javax.swing.JLabel();
+        btnPush = new javax.swing.JButton();
+        btnByeFelicia = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("jLabel1");
+        lblExample.setText("Team C#!");
 
-        jButton1.setText("Push to be happy!");
+        btnPush.setText("Push to be happy!");
 
-        jButton2.setText("Bye Felicia ");
-        jButton2.setToolTipText("");
+        btnByeFelicia.setText("Bye Felicia ");
+        btnByeFelicia.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -46,21 +46,20 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(125, 125, 125)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton1)
-                        .addComponent(jLabel1)))
+                    .addComponent(btnByeFelicia)
+                    .addComponent(btnPush)
+                    .addComponent(lblExample))
                 .addContainerGap(119, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(jLabel1)
-                .addGap(38, 38, 38)
-                .addComponent(jButton2)
+                .addGap(41, 41, 41)
+                .addComponent(lblExample)
+                .addGap(87, 87, 87)
+                .addComponent(btnByeFelicia)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnPush)
                 .addGap(49, 49, 49))
         );
 
@@ -103,8 +102,8 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnByeFelicia;
+    private javax.swing.JButton btnPush;
+    private javax.swing.JLabel lblExample;
     // End of variables declaration//GEN-END:variables
 }
