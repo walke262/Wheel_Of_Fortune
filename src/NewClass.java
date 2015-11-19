@@ -10,4 +10,6 @@
  */
 public class NewClass {
     //DO you see me now?
+    //If you're happy and you know it,
+    //Clap your hands!!!
 }
