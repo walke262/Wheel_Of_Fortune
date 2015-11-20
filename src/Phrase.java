@@ -15,6 +15,7 @@ public class Phrase {
     private String phrase;
     private String category;
     private String lettersGuessed;
+    private boolean guessed = false;
 
     public Phrase(String phrase, String category) {
         phrase = phrase.toUpperCase();
@@ -56,6 +57,14 @@ public class Phrase {
     public void setLettersGuessed(String lettersGuessed) {
         this.lettersGuessed = lettersGuessed;
     }
+
+    public boolean isGuessed() {
+        return guessed;
+    }
+
+    public void setGuessed(boolean guessed) {
+        this.guessed = guessed;
+    }
     
     public String displayPhrase()
     {
@@ -81,6 +90,11 @@ public class Phrase {
         else
         {
             lettersGuessed += guess.toUpperCase();
+            if (displayPhrase().compareTo(phrase) == 0)
+            {
+                JOptionPane.showMessageDialog(null, "Conratulations, you guessed the phrase correctly!");
+                guessed = true;
+            }
             return true;
         }
     }
@@ -90,6 +104,7 @@ public class Phrase {
         if (guess.toUpperCase().compareTo(phrase) == 0)
         {
             JOptionPane.showMessageDialog(null, "Conratulations, you guessed the phrase correctly!");
+            guessed = true;
             return true;
         }
         else

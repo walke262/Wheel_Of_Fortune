@@ -97,6 +97,7 @@ public class GUI extends javax.swing.JFrame {
             lblGuess.setText(test.getPhrase());
         }
         txtGuess.setText("");
+        disableGuess();
     }//GEN-LAST:event_btnGuessPhraseActionPerformed
 
     private void btnGuessLetterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuessLetterActionPerformed
@@ -106,6 +107,7 @@ public class GUI extends javax.swing.JFrame {
             lblGuess.setText(test.displayPhrase());
         }
         txtGuess.setText("");
+        disableGuess();
     }//GEN-LAST:event_btnGuessLetterActionPerformed
 
     /**
@@ -141,6 +143,15 @@ public class GUI extends javax.swing.JFrame {
                 new GUI().setVisible(true);
             }
         });
+    }
+    
+    private void disableGuess()
+    {
+        if (test.isGuessed())
+        {
+            btnGuessLetter.setEnabled(false);
+            btnGuessPhrase.setEnabled(false);
+        }        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
