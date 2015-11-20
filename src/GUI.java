@@ -13,8 +13,11 @@ public class GUI extends javax.swing.JFrame {
     /**
      * Creates new form GUI
      */
+    Phrase test = new Phrase("This is a test", "tests");
     public GUI() {
         initComponents();
+        lblPhrase.setText("Phrase: " + test.getPhrase());
+        lblGuess.setText(test.displayPhrase());
     }
 
     /**
@@ -26,45 +29,84 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblExample = new javax.swing.JLabel();
-        btnPush = new javax.swing.JButton();
-        btnByeFelicia = new javax.swing.JButton();
+        lblGuess = new javax.swing.JLabel();
+        btnGuessLetter = new javax.swing.JButton();
+        btnGuessPhrase = new javax.swing.JButton();
+        txtGuess = new javax.swing.JTextField();
+        lblPhrase = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblExample.setText("Team C#!");
+        lblGuess.setText("Team C#!");
 
-        btnPush.setText("Push to be happy!");
+        btnGuessLetter.setText("Guess Letter");
+        btnGuessLetter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuessLetterActionPerformed(evt);
+            }
+        });
 
-        btnByeFelicia.setText("Bye Felicia ");
-        btnByeFelicia.setToolTipText("");
+        btnGuessPhrase.setText("Guess Phrase");
+        btnGuessPhrase.setToolTipText("");
+        btnGuessPhrase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuessPhraseActionPerformed(evt);
+            }
+        });
+
+        lblPhrase.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(125, 125, 125)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnByeFelicia)
-                    .addComponent(btnPush)
-                    .addComponent(lblExample))
-                .addContainerGap(119, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnGuessPhrase, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                        .addComponent(btnGuessLetter, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtGuess, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(lblPhrase)
+                    .addComponent(lblGuess))
+                .addContainerGap(234, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(lblExample)
-                .addGap(87, 87, 87)
-                .addComponent(btnByeFelicia)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addComponent(btnPush)
-                .addGap(49, 49, 49))
+                .addContainerGap()
+                .addComponent(lblPhrase)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblGuess)
+                .addGap(50, 50, 50)
+                .addComponent(txtGuess, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(btnGuessLetter)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnGuessPhrase)
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuessPhraseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuessPhraseActionPerformed
+        // TODO add your handling code here:
+        if (test.guessPhrase(txtGuess.getText()))
+        {
+            lblGuess.setText(test.getPhrase());
+        }
+        txtGuess.setText("");
+    }//GEN-LAST:event_btnGuessPhraseActionPerformed
+
+    private void btnGuessLetterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuessLetterActionPerformed
+        // TODO add your handling code here:
+        if (test.guessLetter(txtGuess.getText()))
+        {
+            lblGuess.setText(test.displayPhrase());
+        }
+        txtGuess.setText("");
+    }//GEN-LAST:event_btnGuessLetterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -102,8 +144,10 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnByeFelicia;
-    private javax.swing.JButton btnPush;
-    private javax.swing.JLabel lblExample;
+    private javax.swing.JButton btnGuessLetter;
+    private javax.swing.JButton btnGuessPhrase;
+    private javax.swing.JLabel lblGuess;
+    private javax.swing.JLabel lblPhrase;
+    private javax.swing.JTextField txtGuess;
     // End of variables declaration//GEN-END:variables
 }
