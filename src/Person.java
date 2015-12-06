@@ -37,5 +37,8 @@ public class Person {
     public double getCurrentBalance(){
         return this.currentBalance;
     }
-    
+    //Mehtod to increase the current balance of a player by a set amount
+    public void increaseCurrentBalance(double amount){
+        this.currentBalance += amount;
+    }
 }
