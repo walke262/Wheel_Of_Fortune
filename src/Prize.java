@@ -22,11 +22,8 @@ public class Prize {
         return this.amount += amount;
     }
 
-    public int debit(int amount) {
-        return this.amount -= amount;
-    }
 
-    public int amount() {
+    public int getAmount() {
         return amount;
     }
 
