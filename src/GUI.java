@@ -16,8 +16,8 @@ public class GUI extends javax.swing.JFrame {
     Phrase test = new Phrase("This is a test", "tests");
     public GUI() {
         initComponents();
-        jLabel3.setText("Phrase: " + test.getPhrase());
-        jLable4.setText(test.displayPhrase());
+        WelcomeLabel.setText("Phrase: " + test.getPhrase());
+        TitleImageLabel.setText(test.displayPhrase());
     }
 
     /**
@@ -31,12 +31,12 @@ public class GUI extends javax.swing.JFrame {
 
         btnLogIn = new javax.swing.JButton();
         btnPlayAsGuest = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        WelcomeLabel = new javax.swing.JLabel();
+        UsernameLabel = new javax.swing.JLabel();
+        PasswordLabel = new javax.swing.JLabel();
         UsernameTextField = new javax.swing.JTextField();
         PassWordTextField = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        TitleImageLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,13 +55,13 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Welcome to the");
+        WelcomeLabel.setText("Welcome to the");
 
-        jLabel1.setText("Username:");
+        UsernameLabel.setText("Username:");
 
-        jLabel2.setText("Password:");
+        PasswordLabel.setText("Password:");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Alison\\Desktop\\images.jpg")); // NOI18N
+        TitleImageLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\Alison\\Desktop\\images.jpg")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,35 +77,35 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(110, 110, 110)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
+                            .addComponent(PasswordLabel)
+                            .addComponent(UsernameLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(UsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(PassWordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(110, 110, 110)
-                        .addComponent(jLabel4))
+                        .addComponent(TitleImageLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(205, 205, 205)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(WelcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(153, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(67, 67, 67)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(WelcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                .addComponent(TitleImageLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(UsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(UsernameLabel))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(PassWordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(PasswordLabel))
                 .addGap(25, 25, 25)
                 .addComponent(btnLogIn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -120,7 +120,7 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (test.guessPhrase(txtGuess.getText()))
         {
-            jLable4.setText(test.getPhrase());
+            TitleImageLabel.setText(test.getPhrase());
         }
         txtGuess.setText("");
         disableGuess();
@@ -130,7 +130,7 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (test.guessLetter(txtGuess.getText()))
         {
-            jLable4.setText(test.displayPhrase());
+            TitleImageLabel.setText(test.displayPhrase());
         }
         txtGuess.setText("");
         disableGuess();
@@ -182,12 +182,12 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField PassWordTextField;
+    private javax.swing.JLabel PasswordLabel;
+    private javax.swing.JLabel TitleImageLabel;
+    private javax.swing.JLabel UsernameLabel;
     private javax.swing.JTextField UsernameTextField;
+    private javax.swing.JLabel WelcomeLabel;
     private javax.swing.JButton btnLogIn;
     private javax.swing.JButton btnPlayAsGuest;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }
