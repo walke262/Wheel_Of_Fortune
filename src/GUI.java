@@ -16,8 +16,8 @@ public class GUI extends javax.swing.JFrame {
     Phrase test = new Phrase("This is a test", "tests");
     public GUI() {
         initComponents();
-        lblPhrase.setText("Phrase: " + test.getPhrase());
-        lblGuess.setText(test.displayPhrase());
+        jLabel3.setText("Phrase: " + test.getPhrase());
+        jLable4.setText(test.displayPhrase());
     }
 
     /**
@@ -29,86 +29,112 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblGuess = new javax.swing.JLabel();
-        btnGuessLetter = new javax.swing.JButton();
-        btnGuessPhrase = new javax.swing.JButton();
-        txtGuess = new javax.swing.JTextField();
-        lblPhrase = new javax.swing.JLabel();
+        btnLogIn = new javax.swing.JButton();
+        btnPlayAsGuest = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        UsernameTextField = new javax.swing.JTextField();
+        PassWordTextField = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblGuess.setText("Team C#!");
-
-        btnGuessLetter.setText("Guess Letter");
-        btnGuessLetter.addActionListener(new java.awt.event.ActionListener() {
+        btnLogIn.setText("Login");
+        btnLogIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuessLetterActionPerformed(evt);
+                btnLogInActionPerformed(evt);
             }
         });
 
-        btnGuessPhrase.setText("Guess Phrase");
-        btnGuessPhrase.setToolTipText("");
-        btnGuessPhrase.addActionListener(new java.awt.event.ActionListener() {
+        btnPlayAsGuest.setText("Play as Guest");
+        btnPlayAsGuest.setToolTipText("");
+        btnPlayAsGuest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuessPhraseActionPerformed(evt);
+                btnPlayAsGuestActionPerformed(evt);
             }
         });
 
-        lblPhrase.setText("jLabel1");
+        jLabel3.setText("Welcome to the");
+
+        jLabel1.setText("Username:");
+
+        jLabel2.setText("Password:");
+
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Alison\\Desktop\\images.jpg")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btnGuessPhrase, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                        .addComponent(btnGuessLetter, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtGuess, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addComponent(lblPhrase)
-                    .addComponent(lblGuess))
-                .addContainerGap(234, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(195, 195, 195)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPlayAsGuest)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(UsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PassWordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(205, 205, 205)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblPhrase)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblGuess)
-                .addGap(29, 29, 29)
-                .addComponent(txtGuess, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(UsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(PassWordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(25, 25, 25)
+                .addComponent(btnLogIn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnGuessLetter)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnGuessPhrase)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addComponent(btnPlayAsGuest)
+                .addGap(66, 66, 66))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGuessPhraseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuessPhraseActionPerformed
+    private void btnPlayAsGuestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayAsGuestActionPerformed
         // TODO add your handling code here:
         if (test.guessPhrase(txtGuess.getText()))
         {
-            lblGuess.setText(test.getPhrase());
+            jLable4.setText(test.getPhrase());
         }
         txtGuess.setText("");
         disableGuess();
-    }//GEN-LAST:event_btnGuessPhraseActionPerformed
+    }//GEN-LAST:event_btnPlayAsGuestActionPerformed
 
-    private void btnGuessLetterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuessLetterActionPerformed
+    private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
         // TODO add your handling code here:
         if (test.guessLetter(txtGuess.getText()))
         {
-            lblGuess.setText(test.displayPhrase());
+            jLable4.setText(test.displayPhrase());
         }
         txtGuess.setText("");
         disableGuess();
-    }//GEN-LAST:event_btnGuessLetterActionPerformed
+    }//GEN-LAST:event_btnLogInActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,16 +175,19 @@ public class GUI extends javax.swing.JFrame {
     {
         if (test.isGuessed())
         {
-            btnGuessLetter.setEnabled(false);
-            btnGuessPhrase.setEnabled(false);
+            btnLogIn.setEnabled(false);
+            btnPlayAsGuest.setEnabled(false);
         }        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGuessLetter;
-    private javax.swing.JButton btnGuessPhrase;
-    private javax.swing.JLabel lblGuess;
-    private javax.swing.JLabel lblPhrase;
-    private javax.swing.JTextField txtGuess;
+    private javax.swing.JTextField PassWordTextField;
+    private javax.swing.JTextField UsernameTextField;
+    private javax.swing.JButton btnLogIn;
+    private javax.swing.JButton btnPlayAsGuest;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }

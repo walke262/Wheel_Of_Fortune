@@ -3,9 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/NewClass.java</file>
-            <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/Phrase.java</file>
-            <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/GUI.java</file>
+            <file>file:/Users/tylerjohnson/NetBeansProjects/Wheel_Of_Fortune/src/NewClass.java</file>
+            <file>file:/Users/tylerjohnson/NetBeansProjects/Wheel_Of_Fortune/src/RegisteredUser.java</file>
+            <file>file:/Users/tylerjohnson/NetBeansProjects/Wheel_Of_Fortune/src/AuthenticationServer.java</file>
+            <file>file:/Users/tylerjohnson/NetBeansProjects/Wheel_Of_Fortune/src/MyServerSocket.java</file>
+            <file>file:/Users/tylerjohnson/NetBeansProjects/Wheel_Of_Fortune/src/GUI.java</file>
+            <file>file:/Users/tylerjohnson/NetBeansProjects/Wheel_Of_Fortune/src/Phrase.java</file>
+            <file>file:/Users/tylerjohnson/NetBeansProjects/Wheel_Of_Fortune/src/Person.java</file>
+            <file>file:/Users/tylerjohnson/NetBeansProjects/Wheel_Of_Fortune/src/Guest.java</file>
         </group>
     </open-files>
 </project-private>
