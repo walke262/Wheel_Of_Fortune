@@ -14,6 +14,7 @@ public abstract class Person implements Serializable {
     
     private String userName;
     private double currentBalance;
+    private String ip;
     
     public Person(String name, double amount){
         this.userName = name;
@@ -23,6 +24,10 @@ public abstract class Person implements Serializable {
     public Person(String name){
         this.userName = name;
         this.currentBalance = 0;
+    }
+    
+    public void setIp(String ip){
+        this.ip = ip;
     }
     
     public void setUserName(String name){
@@ -35,6 +40,10 @@ public abstract class Person implements Serializable {
     
     public String getUserName(){
         return this.userName;
+    }
+    
+    public String getIp(){
+        return this.ip;
     }
     
     public double getCurrentBalance(){
