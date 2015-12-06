@@ -10,12 +10,12 @@
 public class RegisteredUser extends Person {
     
     private String password;
-    double gamesPlayed;
-    double gamesWon;
-    double phrasesSolved;
-    double totalWinnings;
+    int gamesPlayed;
+    int gamesWon;
+    int phrasesSolved;
+    int totalWinnings;
     
-    public RegisteredUser(String name, double currentBalance, String password, double gamesPlayed, double gamesWon, double phrasesSolved, double totalWinnings){
+    public RegisteredUser(String name, int currentBalance, String password, int gamesPlayed, int gamesWon, int phrasesSolved, int totalWinnings){
         super(name, currentBalance);
         this.password = password;
         this.gamesPlayed = gamesPlayed;
@@ -29,53 +29,53 @@ public class RegisteredUser extends Person {
         return this.password;
     }
     
-    public double getGamesPlayed(){
+    public int getGamesPlayed(){
         return this.gamesPlayed;
     }
     
-    public double getGamesWon(){
+    public int getGamesWon(){
         return this.gamesWon;
     }
     
-    public double getPhrasesSolved(){
+    public int getPhrasesSolved(){
         return this.phrasesSolved;
     }
     
-    public double getTotalWinnings(){
+    public int getTotalWinnings(){
         return this.totalWinnings;
     }
     
-    public void setGamesPlayed(double gamesPlayed){
+    public void setGamesPlayed(int gamesPlayed){
         this.gamesPlayed = gamesPlayed;
     }
     
-    public void setGamesWon(double gamesWon){
+    public void setGamesWon(int gamesWon){
         this.gamesWon = gamesWon;
     }
     
-    public void setPhrasesSolved(double phrasesSolved){
+    public void setPhrasesSolved(int phrasesSolved){
         this.phrasesSolved = phrasesSolved;
     }
     
-    public void setTotalWinnings(double totalWinnings){
+    public void setTotalWinnings(int totalWinnings){
         this.totalWinnings = totalWinnings;
     }
     /* A common need will be to increase the statistics of a player by a certain amount, and the following methods add a specified amount to the respective
     data fields.
     */
-    public void increaseTotalWinnings(double amount){
+    public void increaseTotalWinnings(int amount){
         this.totalWinnings += amount;
     }
     
-    public void increasePhrasesSolved(double amount){
+    public void increasePhrasesSolved(int amount){
         this.phrasesSolved += amount;
     }
     
-    public void increaseGamesPlayed(double amount){
+    public void increaseGamesPlayed(int amount){
         this.gamesPlayed += amount;
     }
     
-    public void increaseGamesWon(double amount){
+    public void increaseGamesWon(int amount){
         this.gamesWon += amount;
     }
     

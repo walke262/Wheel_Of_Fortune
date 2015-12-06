@@ -13,10 +13,10 @@ import java.io.Serializable;
 public abstract class Person implements Serializable {
     
     private String userName;
-    private double currentBalance;
+    private int currentBalance;
     private String ip;
     
-    public Person(String name, double amount){
+    public Person(String name, int amount){
         this.userName = name;
         this.currentBalance = amount;
     }
@@ -34,7 +34,7 @@ public abstract class Person implements Serializable {
         this.userName = name;
     }
     
-    public void setCurrentBalance(double balance){
+    public void setCurrentBalance(int balance){
         this.currentBalance = balance;
     }
     
@@ -50,7 +50,7 @@ public abstract class Person implements Serializable {
         return this.currentBalance;
     }
     //Mehtod to increase the current balance of a player by a set amount
-    public void increaseCurrentBalance(double amount){
+    public void increaseCurrentBalance(int amount){
         this.currentBalance += amount;
     }
 }
