@@ -46,7 +46,7 @@ public abstract class Person implements Serializable {
         return this.ip;
     }
     
-    public double getCurrentBalance(){
+    public int getCurrentBalance(){
         return this.currentBalance;
     }
     //Mehtod to increase the current balance of a player by a set amount
