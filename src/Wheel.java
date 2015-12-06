@@ -14,6 +14,7 @@ import java.util.Random;
 public class Wheel {
     private Random randomGen;
     private int maxPrice;
+    private String lastSpin = "No Spins";
 
 
     public Wheel(){
@@ -27,13 +28,19 @@ public class Wheel {
        
         //Gives random bankruptcy 
         if(randomGen.nextInt(100) <= 5){
+            lastSpin = "Bankruptcy";
             return "Bankruptcy";
         }
         
         //Assigns random value, rounds it to 50
         randomInt = randomGen.nextInt(maxPrice);
         randomInt = ((randomInt + 50) / 50 * 50);
+        lastSpin = Integer.toString(randomInt);
         return Integer.toString(randomInt);
+    }
+    
+    public String LastSpin(){
+        return lastSpin;
     }
     
 }
