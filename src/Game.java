@@ -1,4 +1,5 @@
 
+import java.lang.reflect.InvocationTargetException;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -21,6 +22,44 @@ public class Game extends javax.swing.JFrame {
     Person[] players = new Person[3];
     Wheel wheel = new Wheel();
     Phrase phrase = new Phrase("temp", "temp");    
+//    Object mObject;
+//    Runnable tempRun = new Runnable()
+//    {
+//        
+//        @Override
+//        public void run()
+//        {
+//            boolean loopover = false;
+//            Object tempO = null;
+//            while (!loopover)
+//            {
+//                tempO = client.receiveMessage();
+//                System.out.println(tempO);
+//                if (tempO instanceof Person[])
+//                {
+//                    updateObject(tempO);
+//                    loopover = true;
+//                }
+//                if (tempO instanceof Wheel)
+//                {
+//                    updateObject(tempO);
+//                    loopover = true;
+//                }
+//                if (tempO instanceof Phrase)
+//                {
+//                    updateObject(tempO);
+//                    loopover = true;
+//                }
+//                if (tempO instanceof String)
+//                {
+//                    updateObject(tempO);
+//                    loopover = true;
+//                }
+//            }
+//        }
+//        
+//        
+//    };
     
     public Game() {
         initComponents();
@@ -227,7 +266,7 @@ public class Game extends javax.swing.JFrame {
             
             //sleep();
             
-            waitOnServer();
+            //waitOnServer();
         }
         else
         {
@@ -244,7 +283,7 @@ public class Game extends javax.swing.JFrame {
         
         //sleep();
 
-        waitOnServer();
+        //waitOnServer();
     }//GEN-LAST:event_btnPhraseActionPerformed
 
     private void btnSpinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpinActionPerformed
@@ -254,7 +293,7 @@ public class Game extends javax.swing.JFrame {
         
         //sleep();
         
-        waitOnServer();
+        //waitOnServer();
     }//GEN-LAST:event_btnSpinActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -262,12 +301,84 @@ public class Game extends javax.swing.JFrame {
         disableButtons();
         client.openConnection();
         client.sendMessage(mPerson);        
+        client.addClientListener(new ClientListener() {
+            public void CatchObject(Object obj)
+            {
+                clientSentObject(obj);
+            }
+        });
+        
+        Thread getMessages = new Thread(client);
+        getMessages.start();
 
         //sleep();
         
-        waitOnServer();
+        //waitOnServer();
     }//GEN-LAST:event_formWindowOpened
 
+    private void clientSentObject(Object obj)
+    {
+        Object temp = obj;
+        System.out.println(obj);
+        if (temp instanceof Person[])
+            {
+                players = (Person[])temp;
+                updatePlayers();
+            }
+            else if (temp instanceof Wheel)
+            {
+                wheel = (Wheel)temp;
+                updateWheel();
+            }
+            else if (temp instanceof Phrase)
+            {
+                phrase = (Phrase)temp;
+                System.out.println(((Phrase)temp).displayPhrase());
+                updatePhrase();
+            }
+            else if (temp instanceof String)
+            {
+                String tempString = (String)temp;
+                if (tempString.equals("SPIN"))
+                {
+                    //unlock spin button
+                    disableButtons();
+                    btnSpin.setEnabled(true);
+                    //over = true;
+                }
+                else if (tempString.equals("TURN"))
+                {
+                    //Unlock Guess
+                    disableButtons();
+                    btnLetter.setEnabled(true);
+                    btnPhrase.setEnabled(true);
+                    //over = true;
+                }
+                else if (tempString.equals("TURNLETTER"))
+                {
+                    //Unlock Guess
+                    disableButtons();
+                    btnLetter.setEnabled(true);
+                    //over = true;
+                }
+                else if (tempString.equals("TURNPHRASE"))
+                {
+                    //Unlock Guess
+                    disableButtons();
+                    btnPhrase.setEnabled(true);
+                    //over = true;
+                }
+                else if (tempString.equals("END"))
+                {
+                    JOptionPane.showConfirmDialog(rootPane, "The Game is over!");
+                    //over = true;
+                }
+                else
+                {
+                    lblStatus.setText("Status: " + tempString);
+                }
+            }
+    }
     /**
      * @param args the command line arguments
      */
@@ -317,9 +428,9 @@ public class Game extends javax.swing.JFrame {
 //        this.remove(lblPl1Bal);
 //        this.remove(lblPl2Bal);
 //        this.remove(lblPl3Bal);
-        this.revalidate();
-        this.repaint();
-        
+        revalidate();
+        repaint();
+        revalidate();
         //sleep();
     }
     
@@ -329,8 +440,9 @@ public class Game extends javax.swing.JFrame {
         lblPhraseCategory.setText(phrase.getCategory());
 //        this.remove(lblPhrase);
 //        this.remove(lblPhraseCategory);
-        this.revalidate();
-        this.repaint();
+        revalidate();
+        repaint();
+        revalidate();
         //sleep();
     }
     
@@ -345,8 +457,9 @@ public class Game extends javax.swing.JFrame {
             lblWheelSpin.setText(Integer.toString(wheel.LastSpin()));
         }
 //        this.remove(lblWheelSpin);
-        this.revalidate();
-        this.repaint();
+        revalidate();
+        repaint();
+        revalidate();
         //sleep();
     }
     
@@ -358,10 +471,16 @@ public class Game extends javax.swing.JFrame {
 //        this.remove(btnLetter);
 //        this.remove(btnPhrase);
 //        this.remove(btnSpin);
-        this.revalidate();
-        this.repaint();
+        revalidate();
+        repaint();
+        revalidate();
         //sleep();
     }
+    
+//    private void updateObject(Object obj)
+//    {
+//        mObject = obj;
+//    }
     
     private void waitOnServer()
     {
@@ -370,7 +489,31 @@ public class Game extends javax.swing.JFrame {
         {
             //sleep();
             //SwingUtilities.invokeLater(client);
-            Object temp = client.receiveMessage();
+            //SwingUtilities.invokeLater(tempRun);
+            //Thread tempThread = new Thread(tempRun);
+//            tempThread.start();
+//            try
+//            {
+//                tempThread.join();
+//            }
+//            catch (InterruptedException ex)
+//            {
+//                ex.printStackTrace();
+//            }
+            
+//            try
+//            {
+//                SwingUtilities.invokeAndWait(tempRun);
+//            }
+//            catch (InterruptedException ex)
+//            {
+//                ex.printStackTrace();
+//            }
+//            catch (InvocationTargetException ex2)
+//            {
+//                ex2.printStackTrace();
+//            }
+            Object temp = null;
             System.out.println(temp);
             if (temp instanceof Person[])
             {
@@ -429,8 +572,8 @@ public class Game extends javax.swing.JFrame {
                     lblStatus.setText("Status: " + tempString);
                 }
             }
-            this.revalidate();
-            this.repaint();
+            revalidate();
+            repaint();
         }
     }
     

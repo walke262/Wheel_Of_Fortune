@@ -13,7 +13,11 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-public class Client{
+interface ClientListener {
+    public void CatchObject(Object obj);
+}
+
+public class Client implements Runnable {
     
     private Socket s = null;
     private ObjectInputStream objectInStream = null;
@@ -25,6 +29,7 @@ public class Client{
     private String ip = null;
     private int port = 0;
     private Object message;
+    private ArrayList<ClientListener> listeners = new ArrayList<ClientListener>();
 
     public Client() {
     }
@@ -35,11 +40,28 @@ public class Client{
         port = myPort;
     }
     
-//    @Override
-//    public void run()
-//    {
-//        message = receiveMessage();
-//    }
+    @Override
+    public void run()
+    {
+        boolean over = false;
+        while(!over)
+        {
+            message = receiveMessage();
+            if (message != null)
+            {
+                throwClient();
+            }
+            if (message instanceof String)
+            {
+                String tempString = (String)message;
+                if (tempString.equals("END"))
+                {
+                    over = true;
+                }
+            }
+        }
+        
+    }
     
     public void openConnection()
     {
@@ -134,6 +156,19 @@ public class Client{
 
     public void setMessage(Object message) {
         this.message = message;
+    }
+    
+    public void addClientListener(ClientListener cl)
+    {
+        listeners.add(cl);
+    }
+    
+    public void throwClient()
+    {
+        for (ClientListener cl : listeners)
+        {
+            cl.CatchObject(message);
+        }
     }
     
 }

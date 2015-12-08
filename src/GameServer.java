@@ -153,7 +153,8 @@ public class GameServer extends MyServerSocket{
                             }
                         }
                         
-                        gameServer.sendObjectToAll(gameServer.phrase.get(gameServer.phraseIndex), objectOutputStream);                                
+                        gameServer.sendObjectToAll(gameServer.phrase.get(gameServer.phraseIndex), objectOutputStream);
+                        System.out.println(gameServer.phrase.get(gameServer.phraseIndex).displayPhrase());
                         isCorrect = false;
                     }
                     else
