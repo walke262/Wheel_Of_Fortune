@@ -30,6 +30,7 @@ public class Game extends javax.swing.JFrame {
         initComponents();
         client = new Client(ip, port);
         mPerson = person;
+        lblPlayers.setText("Players - You are: " + person.getUserName());
     }
 
     /**
@@ -49,7 +50,7 @@ public class Game extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         btnLetter = new javax.swing.JButton();
         btnPhrase = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
+        lblPlayers = new javax.swing.JLabel();
         lblPl1Name = new javax.swing.JLabel();
         lblPl2Name = new javax.swing.JLabel();
         lblPl3Name = new javax.swing.JLabel();
@@ -91,7 +92,7 @@ public class Game extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("Players");
+        lblPlayers.setText("Players");
 
         lblPl1Name.setText("Player1");
 
@@ -162,7 +163,7 @@ public class Game extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblPhraseCategory)
-                            .addComponent(jLabel6)
+                            .addComponent(lblPlayers)
                             .addComponent(txtGuess, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
@@ -194,7 +195,7 @@ public class Game extends javax.swing.JFrame {
                     .addComponent(btnPhrase)
                     .addComponent(btnSpin))
                 .addGap(26, 26, 26)
-                .addComponent(jLabel6)
+                .addComponent(lblPlayers)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPl1Name)
@@ -220,7 +221,7 @@ public class Game extends javax.swing.JFrame {
             txtGuess.setText("");
             disableButtons();
             
-            sleep();
+            //sleep();
             
             waitOnServer();
         }
@@ -237,7 +238,7 @@ public class Game extends javax.swing.JFrame {
         txtGuess.setText("");
         disableButtons();
         
-        sleep();
+        //sleep();
 
         waitOnServer();
     }//GEN-LAST:event_btnPhraseActionPerformed
@@ -247,17 +248,18 @@ public class Game extends javax.swing.JFrame {
         client.sendMessage(new Boolean(true));
         disableButtons();
         
-        sleep();
+        //sleep();
         
         waitOnServer();
     }//GEN-LAST:event_btnSpinActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        disableButtons();
         client.openConnection();
-        client.sendMessage(mPerson);
+        client.sendMessage(mPerson);        
 
-        sleep();
+        //sleep();
         
         waitOnServer();
     }//GEN-LAST:event_formWindowOpened
@@ -305,12 +307,14 @@ public class Game extends javax.swing.JFrame {
         lblPl2Bal.setText(Integer.toString(players[1].getCurrentBalance()));
         lblPl3Name.setText(players[2].getUserName());
         lblPl3Bal.setText(Integer.toString(players[2].getCurrentBalance()));
+        sleep();
     }
     
     private void updatePhrase()
     {
         lblPhrase.setText(phrase.displayPhrase());
         lblPhraseCategory.setText(phrase.getCategory());
+        sleep();
     }
     
     private void updateWheel()
@@ -323,6 +327,7 @@ public class Game extends javax.swing.JFrame {
         {
             lblWheelSpin.setText(Integer.toString(wheel.LastSpin()));
         }
+        sleep();
     }
     
     private void disableButtons()
@@ -330,6 +335,7 @@ public class Game extends javax.swing.JFrame {
         btnLetter.setEnabled(false);
         btnPhrase.setEnabled(false);
         btnSpin.setEnabled(false);
+        sleep();
     }
     
     private void waitOnServer()
@@ -337,13 +343,25 @@ public class Game extends javax.swing.JFrame {
         Boolean over = false;
         while (!over)
         {
+            sleep();
             Object temp = client.receiveMessage();
+            System.out.println(temp);
             if (temp instanceof Person[])
             {
                 players = (Person[])temp;
                 updatePlayers();
             }
-            if (temp instanceof String)
+            else if (temp instanceof Wheel)
+            {
+                wheel = (Wheel)temp;
+                updateWheel();
+            }
+            else if (temp instanceof Phrase)
+            {
+                phrase = (Phrase)temp;
+                updatePhrase();
+            }
+            else if (temp instanceof String)
             {
                 String tempString = (String)temp;
                 if (tempString.equals("SPIN"))
@@ -353,7 +371,7 @@ public class Game extends javax.swing.JFrame {
                     btnSpin.setEnabled(true);
                     over = true;
                 }
-                if (tempString.equals("TURN"))
+                else if (tempString.equals("TURN"))
                 {
                     //Unlock Guess
                     disableButtons();
@@ -361,21 +379,21 @@ public class Game extends javax.swing.JFrame {
                     btnPhrase.setEnabled(true);
                     over = true;
                 }
-                if (tempString.equals("TURNLETTER"))
+                else if (tempString.equals("TURNLETTER"))
                 {
                     //Unlock Guess
                     disableButtons();
                     btnLetter.setEnabled(true);
                     over = true;
                 }
-                if (tempString.equals("TURNPHRASE"))
+                else if (tempString.equals("TURNPHRASE"))
                 {
                     //Unlock Guess
                     disableButtons();
                     btnPhrase.setEnabled(true);
                     over = true;
                 }
-                if (tempString.equals("END"))
+                else if (tempString.equals("END"))
                 {
                     JOptionPane.showConfirmDialog(rootPane, "The Game is over!");
                     over = true;
@@ -385,18 +403,7 @@ public class Game extends javax.swing.JFrame {
                     lblStatus.setText("Status: " + tempString);
                 }
             }
-            if (temp instanceof Wheel)
-            {
-                wheel = (Wheel)temp;
-                updateWheel();
-            }
-            if (temp instanceof Phrase)
-            {
-                phrase = (Phrase)temp;
-                updatePhrase();
-            }            
         }
-
     }
     
     private void sleep()
@@ -418,7 +425,6 @@ public class Game extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel lblPhrase;
     private javax.swing.JLabel lblPhraseCategory;
     private javax.swing.JLabel lblPl1Bal;
@@ -427,6 +433,7 @@ public class Game extends javax.swing.JFrame {
     private javax.swing.JLabel lblPl2Name;
     private javax.swing.JLabel lblPl3Bal;
     private javax.swing.JLabel lblPl3Name;
+    private javax.swing.JLabel lblPlayers;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblWheelSpin;
     private javax.swing.JTextField txtGuess;

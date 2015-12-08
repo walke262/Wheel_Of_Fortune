@@ -170,8 +170,10 @@ public class GameServer extends MyServerSocket{
                     isSpun = (Boolean) gameClientObjects;
                     if (isSpun) {
                         //The wheel has been spun
+                        gameServer.wheel.Spin();
                         gameServer.sendObjectToAll(gameServer.wheel, objectOutputStream);
-                        if (gameServer.wheel.Spin() < 0) {
+
+                        if (gameServer.wheel.LastSpin() < 0) {
                             gameServer.playerInfo[gameServer.currentPlayer].setCurrentBalance(0);
                             gameServer.sendObjectToAll(gameServer.playerInfo, objectOutputStream);
                             gameServer.updatePlayerTurn();
@@ -214,9 +216,9 @@ public class GameServer extends MyServerSocket{
     {
         try
         {
-            for (ObjectOutputStream writer : oos)
+            for (int i = 0; i < 3; i++)
             {
-                writer.writeObject(obj);
+                oos[i].writeObject(obj);
             }
         }
         catch (IOException ex)
