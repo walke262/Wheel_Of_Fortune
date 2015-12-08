@@ -311,6 +311,15 @@ public class Game extends javax.swing.JFrame {
         lblPl2Bal.setText(Integer.toString(players[1].getCurrentBalance()));
         lblPl3Name.setText(players[2].getUserName());
         lblPl3Bal.setText(Integer.toString(players[2].getCurrentBalance()));
+        this.remove(lblPl1Name);
+        this.remove(lblPl2Name);
+        this.remove(lblPl3Name);
+        this.remove(lblPl1Bal);
+        this.remove(lblPl2Bal);
+        this.remove(lblPl3Bal);
+        this.revalidate();
+        this.repaint();
+        
         //sleep();
     }
     
@@ -318,6 +327,10 @@ public class Game extends javax.swing.JFrame {
     {
         lblPhrase.setText(phrase.displayPhrase());
         lblPhraseCategory.setText(phrase.getCategory());
+        this.remove(lblPhrase);
+        this.remove(lblPhraseCategory);
+        this.revalidate();
+        this.repaint();
         //sleep();
     }
     
@@ -331,6 +344,9 @@ public class Game extends javax.swing.JFrame {
         {
             lblWheelSpin.setText(Integer.toString(wheel.LastSpin()));
         }
+        this.remove(lblWheelSpin);
+        this.revalidate();
+        this.repaint();
         //sleep();
     }
     
