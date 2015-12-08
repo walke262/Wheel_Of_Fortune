@@ -1,5 +1,6 @@
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -347,6 +348,7 @@ public class Game extends javax.swing.JFrame {
         while (!over)
         {
             //sleep();
+            //SwingUtilities.invokeLater(client);
             Object temp = client.receiveMessage();
             System.out.println(temp);
             if (temp instanceof Person[])
@@ -406,6 +408,7 @@ public class Game extends javax.swing.JFrame {
                     lblStatus.setText("Status: " + tempString);
                 }
             }
+            revalidate();
         }
     }
     

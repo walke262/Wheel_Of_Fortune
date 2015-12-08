@@ -13,7 +13,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-public class Client {
+public class Client{
     
     private Socket s = null;
     private ObjectInputStream objectInStream = null;
@@ -24,6 +24,7 @@ public class Client {
     private PrintWriter out = null;
     private String ip = null;
     private int port = 0;
+    private Object message;
 
     public Client() {
     }
@@ -33,6 +34,12 @@ public class Client {
         ip = myIP;
         port = myPort;
     }
+    
+//    @Override
+//    public void run()
+//    {
+//        message = receiveMessage();
+//    }
     
     public void openConnection()
     {
@@ -107,6 +114,7 @@ public class Client {
         try
         {
             objectOutStream.writeObject(msg);
+            objectOutStream.flush();
         }
         catch (IOException ex)
         {
@@ -118,6 +126,14 @@ public class Client {
     public boolean getConnectionStatus()
     {
         return s.isConnected();
+    }
+
+    public Object getMessage() {
+        return message;
+    }
+
+    public void setMessage(Object message) {
+        this.message = message;
     }
     
 }

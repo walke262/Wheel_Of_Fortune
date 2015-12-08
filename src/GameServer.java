@@ -208,6 +208,7 @@ public class GameServer extends MyServerSocket{
         try
         {
             oos.writeObject(obj);
+            oos.flush();
         }
         catch (IOException ex)
         {
@@ -222,6 +223,7 @@ public class GameServer extends MyServerSocket{
             for (ObjectOutputStream writer : oos)
             {
                 writer.writeObject(obj);
+                writer.flush();
             }
 //            for (int i = 0; i < 3; i++)
 //            {
