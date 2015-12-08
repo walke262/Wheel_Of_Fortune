@@ -23,6 +23,9 @@ public class Game extends javax.swing.JFrame {
     
     public Game() {
         initComponents();
+        client = new Client("127.0.0.1", 1337);
+        mPerson = new Guest();
+        lblPlayers.setText("Players - You are: " + mPerson.getUserName());
     }
     
     public Game(String ip, int port, Person person)
@@ -245,7 +248,7 @@ public class Game extends javax.swing.JFrame {
 
     private void btnSpinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpinActionPerformed
         // TODO add your handling code here:
-        client.sendMessage(new Boolean(true));
+        client.sendMessage(true);
         disableButtons();
         
         //sleep();
@@ -307,14 +310,14 @@ public class Game extends javax.swing.JFrame {
         lblPl2Bal.setText(Integer.toString(players[1].getCurrentBalance()));
         lblPl3Name.setText(players[2].getUserName());
         lblPl3Bal.setText(Integer.toString(players[2].getCurrentBalance()));
-        sleep();
+        //sleep();
     }
     
     private void updatePhrase()
     {
         lblPhrase.setText(phrase.displayPhrase());
         lblPhraseCategory.setText(phrase.getCategory());
-        sleep();
+        //sleep();
     }
     
     private void updateWheel()
@@ -327,7 +330,7 @@ public class Game extends javax.swing.JFrame {
         {
             lblWheelSpin.setText(Integer.toString(wheel.LastSpin()));
         }
-        sleep();
+        //sleep();
     }
     
     private void disableButtons()
@@ -335,7 +338,7 @@ public class Game extends javax.swing.JFrame {
         btnLetter.setEnabled(false);
         btnPhrase.setEnabled(false);
         btnSpin.setEnabled(false);
-        sleep();
+        //sleep();
     }
     
     private void waitOnServer()
@@ -343,7 +346,7 @@ public class Game extends javax.swing.JFrame {
         Boolean over = false;
         while (!over)
         {
-            sleep();
+            //sleep();
             Object temp = client.receiveMessage();
             System.out.println(temp);
             if (temp instanceof Person[])

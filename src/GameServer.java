@@ -65,13 +65,12 @@ public class GameServer extends MyServerSocket{
             }
             gameServer.sendObjectToAll(gameServer.playerInfo, objectOutputStream);
             gameServer.sendObjectToAll(gameServer.phrase.get(gameServer.phraseIndex), objectOutputStream);
-            gameServer.sendObjectToAll(gameServer.wheel, objectOutputStream);            
+            gameServer.sendObjectToAll(gameServer.wheel, objectOutputStream);        
+            gameServer.sendObjectToAll(gameServer.playerInfo[gameServer.currentPlayer].getUserName() + "'s turn", objectOutputStream);
+            gameServer.sendObject("SPIN", objectOutputStream[gameServer.currentPlayer]);
 
-            while (!over) 
+            while (!over)
             {                
-                gameServer.sendObjectToAll(gameServer.playerInfo[gameServer.currentPlayer].getUserName() + "'s turn", objectOutputStream);
-                gameServer.sendObject("SPIN", objectOutputStream[gameServer.currentPlayer]);
-                
                 gameClientObjects = gameServer.receiveObject(objectInputStream[gameServer.currentPlayer]);
                 
                 if (gameClientObjects instanceof String) {
@@ -89,7 +88,7 @@ public class GameServer extends MyServerSocket{
                     if (isCorrect) {
                         gameServer.playerInfo[gameServer.currentPlayer].increaseCurrentBalance(gameServer.wheel.LastSpin() * gameServer.phrase.get(gameServer.phraseIndex).countMatches(stringFromClient));
                         gameServer.sendObjectToAll(gameServer.playerInfo[gameServer.currentPlayer].getUserName() +"'s guess of " + stringFromClient + "was correct.", objectOutputStream);
-                        gameServer.sendObjectToAll(gameServer.phrase, objectOutputStream);
+                        gameServer.sendObjectToAll(gameServer.phrase.get(gameServer.phraseIndex), objectOutputStream);
                         gameServer.sendObjectToAll(gameServer.playerInfo, objectOutputStream);
 
                         if (gameServer.phrase.get(gameServer.phraseIndex).isGuessed()){
@@ -163,6 +162,8 @@ public class GameServer extends MyServerSocket{
                     }
 
                     gameServer.updatePlayerTurn();
+                    gameServer.sendObjectToAll(gameServer.playerInfo[gameServer.currentPlayer].getUserName() + "'s turn", objectOutputStream);
+                    gameServer.sendObject("SPIN", objectOutputStream[gameServer.currentPlayer]);
                 }
 
                 else if (gameClientObjects instanceof Boolean) {
@@ -177,6 +178,8 @@ public class GameServer extends MyServerSocket{
                             gameServer.playerInfo[gameServer.currentPlayer].setCurrentBalance(0);
                             gameServer.sendObjectToAll(gameServer.playerInfo, objectOutputStream);
                             gameServer.updatePlayerTurn();
+                            gameServer.sendObjectToAll(gameServer.playerInfo[gameServer.currentPlayer].getUserName() + "'s turn", objectOutputStream);
+                            gameServer.sendObject("SPIN", objectOutputStream[gameServer.currentPlayer]);
                         }
                         else {
                             gameServer.sendObject("TURN", objectOutputStream[gameServer.currentPlayer]);
@@ -216,10 +219,14 @@ public class GameServer extends MyServerSocket{
     {
         try
         {
-            for (int i = 0; i < 3; i++)
+            for (ObjectOutputStream writer : oos)
             {
-                oos[i].writeObject(obj);
+                writer.writeObject(obj);
             }
+//            for (int i = 0; i < 3; i++)
+//            {
+//                oos[i].writeObject(obj);
+//            }
         }
         catch (IOException ex)
         {
