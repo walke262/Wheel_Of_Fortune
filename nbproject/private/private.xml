@@ -3,16 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/Guest.java</file>
-            <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/Game.java</file>
+            <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/Client.java</file>
             <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/MainMenu.java</file>
             <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/PlayGame.java</file>
             <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/Prize.java</file>
-            <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/Phrase.java</file>
             <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/Person.java</file>
             <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/GameServer.java</file>
             <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/Leaderboard.java</file>
             <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/AuthenticationServer.java</file>
+            <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/Wheel.java</file>
+            <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/runGameServer.java</file>
+            <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/Guest.java</file>
+            <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/Game.java</file>
+            <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/Phrase.java</file>
             <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/Login.java</file>
             <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/MyServerSocket.java</file>
         </group>

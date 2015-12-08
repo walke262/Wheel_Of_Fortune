@@ -25,6 +25,7 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu(Person person)
     {
         person = this.person;
+        initComponents();
     }
 
     /**
