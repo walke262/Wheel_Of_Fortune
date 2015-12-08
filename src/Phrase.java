@@ -1,4 +1,5 @@
 
+import java.io.Serializable;
 import javax.swing.JOptionPane;
 
 /*
@@ -11,7 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author Colig
  */
-public class Phrase {
+public class Phrase implements Serializable {
     private String phrase;
     private String category;
     private String lettersGuessed;

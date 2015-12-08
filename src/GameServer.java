@@ -59,6 +59,10 @@ public class GameServer extends MyServerSocket{
             gameServer.phrase.add(new Phrase("The early bird gets the worm", "Phrase"));
             gameServer.phrase.add(new Phrase("Chicken and rice", "On the menu"));
             
+            for (Person p : gameServer.playerInfo)
+            {
+                System.out.println(p.getUserName());
+            }
             gameServer.sendObjectToAll(gameServer.playerInfo, objectOutputStream);
             gameServer.sendObjectToAll(gameServer.phrase.get(gameServer.phraseIndex), objectOutputStream);
             gameServer.sendObjectToAll(gameServer.wheel, objectOutputStream);            

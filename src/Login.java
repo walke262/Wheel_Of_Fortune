@@ -131,6 +131,7 @@ public class Login extends javax.swing.JFrame {
 //        disableGuess();
         Person person = new Guest();
         MainMenu menu = new MainMenu(person);
+        System.out.println(person.getUserName());
         menu.setVisible(true);
     }//GEN-LAST:event_btnPlayAsGuestActionPerformed
 

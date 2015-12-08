@@ -9,9 +9,10 @@
  * @author mitchdunc
  */
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Wheel {
+public class Wheel implements Serializable {
     private Random randomGen;
     private int maxPrice;
     int lastSpin;

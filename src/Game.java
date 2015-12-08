@@ -16,6 +16,7 @@ public class Game extends javax.swing.JFrame {
      * Creates new form Game
      */
     Client client;
+    Person mPerson = new Guest();
     Person[] players = new Person[3];
     Wheel wheel = new Wheel();
     Phrase phrase = new Phrase("temp", "temp");    
@@ -28,9 +29,7 @@ public class Game extends javax.swing.JFrame {
     {
         initComponents();
         client = new Client(ip, port);
-        client.sendMessage(person);
-
-        waitOnServer();
+        mPerson = person;
     }
 
     /**
@@ -62,6 +61,11 @@ public class Game extends javax.swing.JFrame {
         lblStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Puzzle");
 
@@ -215,6 +219,9 @@ public class Game extends javax.swing.JFrame {
             client.sendMessage(guess);
             txtGuess.setText("");
             disableButtons();
+            
+            sleep();
+            
             waitOnServer();
         }
         else
@@ -229,6 +236,9 @@ public class Game extends javax.swing.JFrame {
         client.sendMessage(guess);
         txtGuess.setText("");
         disableButtons();
+        
+        sleep();
+
         waitOnServer();
     }//GEN-LAST:event_btnPhraseActionPerformed
 
@@ -236,8 +246,21 @@ public class Game extends javax.swing.JFrame {
         // TODO add your handling code here:
         client.sendMessage(new Boolean(true));
         disableButtons();
+        
+        sleep();
+        
         waitOnServer();
     }//GEN-LAST:event_btnSpinActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        client.openConnection();
+        client.sendMessage(mPerson);
+
+        sleep();
+        
+        waitOnServer();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -359,7 +382,7 @@ public class Game extends javax.swing.JFrame {
                 }
                 else
                 {
-                    lblStatus.setText("Status:" + tempString);
+                    lblStatus.setText("Status: " + tempString);
                 }
             }
             if (temp instanceof Wheel)
@@ -374,6 +397,18 @@ public class Game extends javax.swing.JFrame {
             }            
         }
 
+    }
+    
+    private void sleep()
+    {
+        try
+        {
+            Thread.sleep(500);
+        }
+        catch (InterruptedException ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

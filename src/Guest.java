@@ -13,7 +13,7 @@ import java.util.UUID;
 public class Guest extends Person {
     
     public Guest(){
-      super("Guest", 0);
+      super(generateUserName(), 0);
     }
     
     public void setUserName(){

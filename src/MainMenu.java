@@ -22,9 +22,9 @@ public class MainMenu extends javax.swing.JFrame {
         initComponents();
     }
     
-    public MainMenu(Person person)
+    public MainMenu(Person p)
     {
-        person = this.person;
+        person = p;
         initComponents();
     }
 
@@ -107,6 +107,9 @@ public class MainMenu extends javax.swing.JFrame {
         String connection = JOptionPane.showInputDialog("Enter an IP/URL and Port");
         String IP = connection.substring(0, connection.indexOf(':'));
         int port = Integer.parseInt(connection.substring(connection.indexOf(':') + 1));
+        System.out.println(IP);
+        System.out.print(port);
+        System.out.print(person.getUserName());
         Game test = new Game(IP, port, person);
         test.setVisible(true);
 //        if (connection.matches("[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}:[0-9]*"))
