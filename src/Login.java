@@ -8,16 +8,16 @@
  *
  * @author Alison
  */
-public class GUI extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame {
 
     /**
-     * Creates new form GUI
+     * Creates new form Login
      */
     Phrase test = new Phrase("This is a test", "tests");
-    public GUI() {
+    public Login() {
         initComponents();
-        WelcomeLabel.setText("Phrase: " + test.getPhrase());
-        TitleImageLabel.setText(test.displayPhrase());
+//        WelcomeLabel.setText("Phrase: " + test.getPhrase());
+//        TitleImageLabel.setText(test.displayPhrase());
     }
 
     /**
@@ -123,22 +123,35 @@ public class GUI extends javax.swing.JFrame {
 
     private void btnPlayAsGuestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayAsGuestActionPerformed
         // TODO add your handling code here:
-        if (test.guessPhrase(txtGuess.getText()))
-        {
-            TitleImageLabel.setText(test.getPhrase());
-        }
-        txtGuess.setText("");
-        disableGuess();
+//        if (test.guessPhrase(txtGuess.getText()))
+//        {
+//            TitleImageLabel.setText(test.getPhrase());
+//        }
+//        txtGuess.setText("");
+//        disableGuess();
+        Person person = new Guest();
+        MainMenu menu = new MainMenu(person);
+        menu.setVisible(true);
     }//GEN-LAST:event_btnPlayAsGuestActionPerformed
 
     private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
         // TODO add your handling code here:
-        if (test.guessLetter(txtGuess.getText()))
+//        if (test.guessLetter(txtGuess.getText()))
+//        {
+//            TitleImageLabel.setText(test.displayPhrase());
+//        }
+//        txtGuess.setText("");
+//        disableGuess();
+        Boolean success = false;
+        if (success)
         {
-            TitleImageLabel.setText(test.displayPhrase());
+            // Person from the server, change this
+            Person person = new Guest();
+            MainMenu menu = new MainMenu(person);
+            menu.setVisible(true);
+            
+            
         }
-        txtGuess.setText("");
-        disableGuess();
     }//GEN-LAST:event_btnLogInActionPerformed
 
     /**
@@ -158,20 +171,21 @@ public class GUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUI().setVisible(true);
+                new Login().setVisible(true);
             }
         });
     }

@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,8 +15,16 @@ public class MainMenu extends javax.swing.JFrame {
     /**
      * Creates new form MainMenu
      */
+    
+    private Person person;
+    
     public MainMenu() {
         initComponents();
+    }
+    
+    public MainMenu(Person person)
+    {
+        person = this.person;
     }
 
     /**
@@ -92,6 +103,16 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String connection = JOptionPane.showInputDialog("Enter an IP/URL and Port");
+        String IP = connection.substring(0, connection.indexOf(':'));
+        int port = Integer.parseInt(connection.substring(connection.indexOf(':') + 1));
+        Game test = new Game(IP, port, person);
+        test.setVisible(true);
+//        if (connection.matches("[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}:[0-9]*"))
+//        {
+//            JOptionPane.showMessageDialog(rootPane, "Hey, that's good.");
+//            
+//        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

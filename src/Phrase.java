@@ -66,6 +66,19 @@ public class Phrase {
         this.guessed = guessed;
     }
     
+    public int countMatches(String LetterGuess)
+    {
+        int total = 0;
+        for (int i = 0; i < phrase.length(); i++)
+        {
+            if(phrase.charAt(i) == LetterGuess.charAt(0))
+            {
+                total++;
+            }
+        }
+        return total;
+    }
+    
     public String displayPhrase()
     {
         String temp;
@@ -76,6 +89,30 @@ public class Phrase {
     }
     
     public boolean guessLetter(String guess)
+    {
+        if (!guess.matches("[a-zA-Z]"))
+        {
+            //JOptionPane.showMessageDialog(null, "Your guess must be a single letter.");
+            return false;
+        }
+        else if (guess.toUpperCase().matches("[" + lettersGuessed + "]"))
+        {
+            //JOptionPane.showMessageDialog(null, "Your guess: \"" + guess + "\" has already been made.");
+            return false;
+        }
+        else
+        {
+            lettersGuessed += guess.toUpperCase();
+            if (displayPhrase().compareTo(phrase) == 0)
+            {
+                //JOptionPane.showMessageDialog(null, "Conratulations, you guessed the phrase correctly!");
+                guessed = true;
+            }
+            return true;
+        }
+    }
+    
+    public boolean guessLetterClient(String guess)
     {
         if (!guess.matches("[a-zA-Z]"))
         {
@@ -92,7 +129,7 @@ public class Phrase {
             lettersGuessed += guess.toUpperCase();
             if (displayPhrase().compareTo(phrase) == 0)
             {
-                JOptionPane.showMessageDialog(null, "Conratulations, you guessed the phrase correctly!");
+                //JOptionPane.showMessageDialog(null, "Conratulations, you guessed the phrase correctly!");
                 guessed = true;
             }
             return true;
@@ -103,13 +140,13 @@ public class Phrase {
     {
         if (guess.toUpperCase().compareTo(phrase) == 0)
         {
-            JOptionPane.showMessageDialog(null, "Conratulations, you guessed the phrase correctly!");
+            //JOptionPane.showMessageDialog(null, "Conratulations, you guessed the phrase correctly!");
             guessed = true;
             return true;
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "Unfortunately your guess: \"" + guess + "\" was incorrect.");
+            //JOptionPane.showMessageDialog(null, "Unfortunately your guess: \"" + guess + "\" was incorrect.");
             return false;
         }
     }

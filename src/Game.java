@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,8 +15,22 @@ public class Game extends javax.swing.JFrame {
     /**
      * Creates new form Game
      */
+    Client client;
+    Person[] players = new Person[3];
+    Wheel wheel = new Wheel();
+    Phrase phrase = new Phrase("temp", "temp");    
+    
     public Game() {
         initComponents();
+    }
+    
+    public Game(String ip, int port, Person person)
+    {
+        initComponents();
+        client = new Client(ip, port);
+        client.sendMessage(person);
+
+        waitOnServer();
     }
 
     /**
@@ -26,124 +43,124 @@ public class Game extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        phraseLetters = new javax.swing.JLabel();
+        lblPhrase = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listWheel = new javax.swing.JList();
-        categoryLabel = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        lblPhraseCategory = new javax.swing.JLabel();
+        txtGuess = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnLetter = new javax.swing.JButton();
+        btnPhrase = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        player1Label = new javax.swing.JLabel();
-        player2Label = new javax.swing.JLabel();
-        player3Label = new javax.swing.JLabel();
-        player1Earnings = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        lblPl1Name = new javax.swing.JLabel();
+        lblPl2Name = new javax.swing.JLabel();
+        lblPl3Name = new javax.swing.JLabel();
+        lblPl1Bal = new javax.swing.JLabel();
+        lblPl2Bal = new javax.swing.JLabel();
+        lblPl3Bal = new javax.swing.JLabel();
+        btnSpin = new javax.swing.JButton();
+        lblWheelSpin = new javax.swing.JLabel();
+        lblStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Puzzle");
 
-        phraseLetters.setText("Phrase Text here");
+        lblPhrase.setText("Phrase Text here");
 
         jLabel3.setText("Wheel");
 
-        listWheel.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "$450", "$300", "$1000", "BANKRUPT", "$500", "$200", "$600", "$800" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(listWheel);
-
-        categoryLabel.setText("Category Here");
-
-        jTextField1.setText("jTextField1");
+        lblPhraseCategory.setText("Category Here");
 
         jLabel5.setText("Guess");
 
-        jButton1.setText("Guess Letter");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnLetter.setText("Guess Letter");
+        btnLetter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnLetterActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Guess Puzzle");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnPhrase.setText("Guess Puzzle");
+        btnPhrase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnPhraseActionPerformed(evt);
             }
         });
 
         jLabel6.setText("Players");
 
-        player1Label.setText("Player1");
+        lblPl1Name.setText("Player1");
 
-        player2Label.setText("Player2");
+        lblPl2Name.setText("Player2");
 
-        player3Label.setText("Player3");
+        lblPl3Name.setText("Player3");
 
-        player1Earnings.setText("$0");
+        lblPl1Bal.setText("$0");
 
-        jLabel2.setText("$100");
+        lblPl2Bal.setText("$100");
 
-        jLabel4.setText("$200");
+        lblPl3Bal.setText("$200");
 
-        jButton3.setText("Spin!");
+        btnSpin.setText("Spin!");
+        btnSpin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSpinActionPerformed(evt);
+            }
+        });
+
+        lblWheelSpin.setText("0");
+
+        lblStatus.setText("Status:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblPl1Bal)
+                    .addComponent(lblPl1Name))
+                .addGap(161, 161, 161)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPl2Name)
+                    .addComponent(lblPl2Bal))
+                .addGap(155, 155, 155)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPl3Bal)
+                    .addComponent(lblPl3Name))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(categoryLabel))
                             .addComponent(jLabel1)
-                            .addComponent(phraseLetters, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                            .addComponent(lblPhrase, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(335, 335, 335))
+                            .addComponent(lblWheelSpin)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(124, 124, 124)
+                                .addComponent(lblStatus)))
+                        .addGap(286, 286, 286))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(btnPhrase)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addComponent(btnSpin)
                         .addGap(236, 236, 236))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(btnLetter))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(player1Earnings)
-                    .addComponent(player1Label))
-                .addGap(161, 161, 161)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(player2Label)
-                    .addComponent(jLabel2))
-                .addGap(155, 155, 155)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(player3Label))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPhraseCategory)
+                            .addComponent(jLabel6)
+                            .addComponent(txtGuess, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,49 +168,76 @@ public class Game extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3)
+                    .addComponent(lblStatus))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(phraseLetters, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(categoryLabel))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPhrase, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(lblWheelSpin)))
+                .addGap(60, 60, 60)
+                .addComponent(lblPhraseCategory)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtGuess, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btnLetter)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnPhrase)
+                    .addComponent(btnSpin))
                 .addGap(26, 26, 26)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(player1Label)
-                    .addComponent(player2Label)
-                    .addComponent(player3Label))
+                    .addComponent(lblPl1Name)
+                    .addComponent(lblPl2Name)
+                    .addComponent(lblPl3Name))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(player1Earnings)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4))
+                    .addComponent(lblPl1Bal)
+                    .addComponent(lblPl2Bal)
+                    .addComponent(lblPl3Bal))
                 .addContainerGap(135, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnLetterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLetterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        String guess = txtGuess.getText();
+        if (phrase.guessLetterClient(guess))
+        {
+            client.sendMessage(guess);
+            txtGuess.setText("");
+            disableButtons();
+            waitOnServer();
+        }
+        else
+        {
+            txtGuess.setText("");
+        }
+    }//GEN-LAST:event_btnLetterActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnPhraseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhraseActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        String guess = txtGuess.getText();
+        client.sendMessage(guess);
+        txtGuess.setText("");
+        disableButtons();
+        waitOnServer();
+    }//GEN-LAST:event_btnPhraseActionPerformed
+
+    private void btnSpinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpinActionPerformed
+        // TODO add your handling code here:
+        client.sendMessage(new Boolean(true));
+        disableButtons();
+        waitOnServer();
+    }//GEN-LAST:event_btnSpinActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,25 +273,127 @@ public class Game extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void updatePlayers()
+    {
+        lblPl1Name.setText(players[0].getUserName());
+        lblPl1Bal.setText(Integer.toString(players[0].getCurrentBalance()));
+        lblPl2Name.setText(players[1].getUserName());
+        lblPl2Bal.setText(Integer.toString(players[1].getCurrentBalance()));
+        lblPl3Name.setText(players[2].getUserName());
+        lblPl3Bal.setText(Integer.toString(players[2].getCurrentBalance()));
+    }
+    
+    private void updatePhrase()
+    {
+        lblPhrase.setText(phrase.displayPhrase());
+        lblPhraseCategory.setText(phrase.getCategory());
+    }
+    
+    private void updateWheel()
+    {
+        if (wheel.LastSpin() < 0)
+        {
+            lblWheelSpin.setText("Bankrupt");
+        }
+        else
+        {
+            lblWheelSpin.setText(Integer.toString(wheel.LastSpin()));
+        }
+    }
+    
+    private void disableButtons()
+    {
+        btnLetter.setEnabled(false);
+        btnPhrase.setEnabled(false);
+        btnSpin.setEnabled(false);
+    }
+    
+    private void waitOnServer()
+    {
+        Boolean over = false;
+        while (!over)
+        {
+            Object temp = client.receiveMessage();
+            if (temp instanceof Person[])
+            {
+                players = (Person[])temp;
+                updatePlayers();
+            }
+            if (temp instanceof String)
+            {
+                String tempString = (String)temp;
+                if (tempString.equals("SPIN"))
+                {
+                    //unlock spin button
+                    disableButtons();
+                    btnSpin.setEnabled(true);
+                    over = true;
+                }
+                if (tempString.equals("TURN"))
+                {
+                    //Unlock Guess
+                    disableButtons();
+                    btnLetter.setEnabled(true);
+                    btnPhrase.setEnabled(true);
+                    over = true;
+                }
+                if (tempString.equals("TURNLETTER"))
+                {
+                    //Unlock Guess
+                    disableButtons();
+                    btnLetter.setEnabled(true);
+                    over = true;
+                }
+                if (tempString.equals("TURNPHRASE"))
+                {
+                    //Unlock Guess
+                    disableButtons();
+                    btnPhrase.setEnabled(true);
+                    over = true;
+                }
+                if (tempString.equals("END"))
+                {
+                    JOptionPane.showConfirmDialog(rootPane, "The Game is over!");
+                    over = true;
+                }
+                else
+                {
+                    lblStatus.setText("Status:" + tempString);
+                }
+            }
+            if (temp instanceof Wheel)
+            {
+                wheel = (Wheel)temp;
+                updateWheel();
+            }
+            if (temp instanceof Phrase)
+            {
+                phrase = (Phrase)temp;
+                updatePhrase();
+            }            
+        }
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel categoryLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnLetter;
+    private javax.swing.JButton btnPhrase;
+    private javax.swing.JButton btnSpin;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JList listWheel;
-    private javax.swing.JLabel phraseLetters;
-    private javax.swing.JLabel player1Earnings;
-    private javax.swing.JLabel player1Label;
-    private javax.swing.JLabel player2Label;
-    private javax.swing.JLabel player3Label;
+    private javax.swing.JLabel lblPhrase;
+    private javax.swing.JLabel lblPhraseCategory;
+    private javax.swing.JLabel lblPl1Bal;
+    private javax.swing.JLabel lblPl1Name;
+    private javax.swing.JLabel lblPl2Bal;
+    private javax.swing.JLabel lblPl2Name;
+    private javax.swing.JLabel lblPl3Bal;
+    private javax.swing.JLabel lblPl3Name;
+    private javax.swing.JLabel lblStatus;
+    private javax.swing.JLabel lblWheelSpin;
+    private javax.swing.JTextField txtGuess;
     // End of variables declaration//GEN-END:variables
 }

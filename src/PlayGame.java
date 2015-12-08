@@ -8,8 +8,13 @@
  *
  * @author mitchdunc
  */
-public class NewClass {
-    //DO you see me now?
-    //If you're happy and you know it,
-    //Clap your hands!!!
+public class PlayGame {
+    
+    public static void main(String[] args)
+    {
+        Login loginGUI = new Login();
+        loginGUI.setVisible(true);
+        
+    }
+    
 }
