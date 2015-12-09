@@ -137,6 +137,7 @@ public class Client implements Runnable {
         {
             objectOutStream.writeObject(msg);
             objectOutStream.flush();
+            objectOutStream.reset();
         }
         catch (IOException ex)
         {

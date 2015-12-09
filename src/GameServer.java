@@ -144,7 +144,8 @@ public class GameServer extends MyServerSocket{
 
                                 if (!isCorrect) {
                                     gameServer.sendObjectToAll(gameServer.playerInfo[indexOfHighestScore].getUserName() + " has lost the final round.", objectOutputStream);
-                                    gameServer.sendMessage("You have lost. But you still win..." + totalWinnings, acceptedClient[indexOfHighestScore]);
+                                    gameServer.sendObject("You have lost. But you still win..." + totalWinnings, objectOutputStream[indexOfHighestScore]);
+                                    //gameServer.sendMessage("You have lost. But you still win..." + totalWinnings, acceptedClient[indexOfHighestScore]);
                                     gameServer.sendObjectToAll(gameServer.phrase.get(gameServer.phraseIndex), objectOutputStream);
                                     gameServer.sendObjectToAll(gameServer.playerInfo, objectOutputStream);
                                     gameServer.sendObjectToAll("END", objectOutputStream);
@@ -210,6 +211,7 @@ public class GameServer extends MyServerSocket{
         {
             oos.writeObject(obj);
             oos.flush();
+            oos.reset();
         }
         catch (IOException ex)
         {
@@ -225,6 +227,7 @@ public class GameServer extends MyServerSocket{
             {
                 writer.writeObject(obj);
                 writer.flush();
+                writer.reset();
             }
 //            for (int i = 0; i < 3; i++)
 //            {
