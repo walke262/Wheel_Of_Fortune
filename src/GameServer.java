@@ -93,7 +93,7 @@ public class GameServer extends MyServerSocket{
 
                         if (gameServer.phrase.get(gameServer.phraseIndex).isGuessed()){
                             gameServer.phraseIndex++;
-                            if (gameServer.phraseIndex > gameServer.phrase.size() - 1) {
+                            if (gameServer.phraseIndex >= gameServer.phrase.size() - 1) {
                                 int highestScore = gameServer.playerInfo[0].getCurrentBalance();
                                 int indexOfHighestScore = 0;
 
@@ -129,7 +129,7 @@ public class GameServer extends MyServerSocket{
                                 for (int i = 0; i < 3; i++) {
                                     gameServer.sendObject("The prize you are playing for is..." + gameServer.prize.getAmount() + "\nYou have " + (3 - i) + " phrase guesses.", objectOutputStream[indexOfHighestScore]);
                                     gameServer.sendObject("TURNPHRASE", objectOutputStream[indexOfHighestScore]);
-                                    guessPhrase = (String) gameServer.receiveObject(acceptedClient[indexOfHighestScore]);
+                                    guessPhrase = (String) gameServer.receiveObject(objectInputStream[indexOfHighestScore]);
                                     isCorrect = gameServer.phrase.get(gameServer.phraseIndex).guessPhrase(guessPhrase);
                                     if (isCorrect) {
                                         totalWinnings += gameServer.prize.getAmount();
