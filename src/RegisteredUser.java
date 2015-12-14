@@ -96,7 +96,7 @@ public class RegisteredUser extends Person {
     }
     
     public String serialize(){
-        return this.getUserName() + "\t" + password + "\t" + this.getCurrentBalance() + "\t" + this.getIp() + "\t" + gamesPlayed +
+        return this.getUserName() + "\t" + password + "\t" + this.getCurrentBalance() + "\t" + gamesPlayed +
                 "\t" + gamesWon + "\t"+ phrasesSolved + "\t"+ totalWinnings;
     }
     public void deserialize(String input){
@@ -105,11 +105,10 @@ public class RegisteredUser extends Person {
         this.setUserName(values[0]);
         this.setPassword(values[1]);
         this.setCurrentBalance(parseInt(values[2]));
-        this.setIp(values[3]);
-        this.setGamesPlayed(parseInt(values[4]));
-        this.setGamesWon(parseInt(values[5]));
-        this.setPhrasesSolved(parseInt(values[6]));
-        this.setTotalWinnings(parseInt(values[7]));
+        this.setGamesPlayed(parseInt(values[3]));
+        this.setGamesWon(parseInt(values[4]));
+        this.setPhrasesSolved(parseInt(values[5]));
+        this.setTotalWinnings(parseInt(values[6]));
         
     }
     
