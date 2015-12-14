@@ -16,6 +16,12 @@ public abstract class Person implements Serializable {
     private int currentBalance;
     private String ip;
     
+    public Person(){
+        userName = "";
+        currentBalance = 0;
+        ip = "";
+    }
+    
     public Person(String name, int amount){
         this.userName = name;
         this.currentBalance = amount;

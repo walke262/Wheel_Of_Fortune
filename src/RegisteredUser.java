@@ -1,3 +1,6 @@
+
+import static java.lang.Integer.parseInt;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,10 +13,19 @@
 public class RegisteredUser extends Person {
     
     private String password;
-    int gamesPlayed;
-    int gamesWon;
-    int phrasesSolved;
-    int totalWinnings;
+    private int gamesPlayed;
+    private int gamesWon;
+    private int phrasesSolved;
+    private int totalWinnings;
+    
+    public RegisteredUser(){
+        super();
+        password = "";
+        gamesPlayed = 0;
+        gamesWon = 0;
+        phrasesSolved = 0;
+        totalWinnings = 0;
+    }
     
     public RegisteredUser(String name, int currentBalance, String password, int gamesPlayed, int gamesWon, int phrasesSolved, int totalWinnings){
         super(name, currentBalance);
@@ -43,6 +55,10 @@ public class RegisteredUser extends Person {
     
     public int getTotalWinnings(){
         return this.totalWinnings;
+    }
+    
+    public void setPassword(String password){
+        this.password = password;
     }
     
     public void setGamesPlayed(int gamesPlayed){
@@ -77,6 +93,24 @@ public class RegisteredUser extends Person {
     
     public void increaseGamesWon(int amount){
         this.gamesWon += amount;
+    }
+    
+    public String serialize(){
+        return this.getUserName() + "\t" + password + "\t" + this.getCurrentBalance() + "\t" + this.getIp() + "\t" + gamesPlayed +
+                "\t" + gamesWon + "\t"+ phrasesSolved + "\t"+ totalWinnings;
+    }
+    public void deserialize(String input){
+        String [] values = input.split("\t");
+        
+        this.setUserName(values[0]);
+        this.setPassword(values[1]);
+        this.setCurrentBalance(parseInt(values[2]));
+        this.setIp(values[3]);
+        this.setGamesPlayed(parseInt(values[4]));
+        this.setGamesWon(parseInt(values[5]));
+        this.setPhrasesSolved(parseInt(values[6]));
+        this.setTotalWinnings(parseInt(values[7]));
+        
     }
     
 }
