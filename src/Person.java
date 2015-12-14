@@ -19,7 +19,6 @@ public abstract class Person implements Serializable {
     public Person(){
         userName = "";
         currentBalance = 0;
-        ip = "";
     }
     
     public Person(String name, int amount){
