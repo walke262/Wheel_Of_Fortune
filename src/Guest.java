@@ -21,7 +21,7 @@ public class Guest extends Person {
     }
     
     public static String generateUserName(){
-        String userName = UUID.randomUUID().toString();
+        String userName = UUID.randomUUID().toString().substring(0,8);
         return userName;
     }
      
