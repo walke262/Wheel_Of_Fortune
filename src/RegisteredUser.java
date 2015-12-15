@@ -1,4 +1,5 @@
 
+import java.io.Serializable;
 import static java.lang.Integer.parseInt;
 
 /*
@@ -10,7 +11,7 @@ import static java.lang.Integer.parseInt;
  *
  * @author tylerjohnson
  */
-public class RegisteredUser extends Person {
+public class RegisteredUser extends Person implements Serializable{
     
     private String password;
     private int gamesPlayed;

@@ -131,6 +131,11 @@ public class Client implements Runnable {
         return temp;
     }
     
+    public String readFromServer()
+    {
+        return in.nextLine();
+    }
+    
     public void sendMessage(Object msg)
     {
         try

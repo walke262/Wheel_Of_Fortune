@@ -1,3 +1,16 @@
+
+import java.awt.Dialog;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -14,6 +27,9 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     Phrase test = new Phrase("This is a test", "tests");
+    MyClientSocket loginClient = null;
+    MyClientSocket createUserClient = null;
+ 
     public Login() {
         initComponents();
 //        WelcomeLabel.setText("Phrase: " + test.getPhrase());
@@ -29,6 +45,14 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dlgCreateUser = new javax.swing.JDialog(this, Dialog.ModalityType.DOCUMENT_MODAL);
+        lblNewUser = new javax.swing.JLabel();
+        lblUsername = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
+        txtUsername = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JTextField();
+        btnCreate = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
         btnLogIn = new javax.swing.JButton();
         btnPlayAsGuest = new javax.swing.JButton();
         WelcomeLabel = new javax.swing.JLabel();
@@ -37,8 +61,83 @@ public class Login extends javax.swing.JFrame {
         UsernameTextField = new javax.swing.JTextField();
         PassWordTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        btnCreateUser = new javax.swing.JButton();
+
+        dlgCreateUser.setBounds(new java.awt.Rectangle(0, 0, 269, 166));
+
+        lblNewUser.setText("Create New User");
+
+        lblUsername.setText("Username:");
+
+        lblPassword.setText("Password:");
+
+        btnCreate.setText("Create");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
+
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dlgCreateUserLayout = new javax.swing.GroupLayout(dlgCreateUser.getContentPane());
+        dlgCreateUser.getContentPane().setLayout(dlgCreateUserLayout);
+        dlgCreateUserLayout.setHorizontalGroup(
+            dlgCreateUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlgCreateUserLayout.createSequentialGroup()
+                .addGroup(dlgCreateUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dlgCreateUserLayout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(lblNewUser))
+                    .addGroup(dlgCreateUserLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(dlgCreateUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(dlgCreateUserLayout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(btnCreate)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCancel))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, dlgCreateUserLayout.createSequentialGroup()
+                                .addComponent(lblUsername)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, dlgCreateUserLayout.createSequentialGroup()
+                                .addComponent(lblPassword)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPassword)))))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        dlgCreateUserLayout.setVerticalGroup(
+            dlgCreateUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dlgCreateUserLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblNewUser)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(dlgCreateUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUsername)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(dlgCreateUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(dlgCreateUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCreate)
+                    .addComponent(btnCancel))
+                .addGap(20, 20, 20))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         btnLogIn.setText("Login");
         btnLogIn.addActionListener(new java.awt.event.ActionListener() {
@@ -66,6 +165,13 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
         jLabel1.setText("Million Dollar Wheel");
 
+        btnCreateUser.setText("Create New User");
+        btnCreateUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateUserActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,10 +192,11 @@ public class Login extends javax.swing.JFrame {
                                     .addComponent(PassWordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(UsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(254, 254, 254)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnPlayAsGuest)
-                                    .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(250, 250, 250)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(btnLogIn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnCreateUser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnPlayAsGuest, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(239, 239, 239)
                         .addComponent(WelcomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -113,9 +220,11 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(PassWordTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnLogIn)
+                .addGap(6, 6, 6)
+                .addComponent(btnCreateUser)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnPlayAsGuest)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
@@ -143,17 +252,99 @@ public class Login extends javax.swing.JFrame {
 //        }
 //        txtGuess.setText("");
 //        disableGuess();
-        Boolean success = false;
-        if (success)
+        
+        
+        
+        String userName = UsernameTextField.getText();
+        String password = PassWordTextField.getText();
+        
+        if (userName.equals("") || password.equals("")) {
+            JOptionPane.showMessageDialog(null, "Username and Password cannot be empty.");
+             return;
+        }
+        
+        UsernameTextField.setText("");
+        PassWordTextField.setText("");
+
+        ArrayList<String> login = new ArrayList<>();
+        login.add(userName);
+        login.add(password);
+        
+        loginClient = new MyClientSocket("127.0.0.1", 8189);
+        loginClient.sendObject(login);
+        Object ruFromServer;
+        ruFromServer = loginClient.readObjectFromServer();
+
+        
+        if (ruFromServer != null)
         {
             // Person from the server, change this
-            Person person = new Guest();
+            Person person = (Person) ruFromServer;
             MainMenu menu = new MainMenu(person);
             menu.setVisible(true);
-            
-            
+            JOptionPane.showMessageDialog(null, "Login Success!");
         }
+        
+        else {
+            JOptionPane.showMessageDialog(null, "LOGIN FAILED!");
+        }
+        
+        loginClient.sendMessage("bye");
+        
     }//GEN-LAST:event_btnLogInActionPerformed
+
+    private void btnCreateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateUserActionPerformed
+        // TODO add your handling code here:
+        
+        dlgCreateUser.setVisible(true);
+    }//GEN-LAST:event_btnCreateUserActionPerformed
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        Object userCheck;
+        txtUsername.setText("");
+        txtPassword.setText("");
+        
+        if (!username.matches("[a-zA-Z0-9]{1,16}")) {
+            JOptionPane.showMessageDialog(null, "Your usename must be alphanumeric.");
+            return;
+        }
+        
+        RegisteredUser ru = new RegisteredUser();
+        ru.setUserName(username);
+        ru.setPassword(password);
+        ru.setCurrentBalance(0);
+        ru.setGamesPlayed(0);
+        ru.setGamesWon(0);
+        ru.setPhrasesSolved(0);
+        ru.setTotalWinnings(0);
+        MyClientSocket createUserClient = new MyClientSocket("localhost", 8189);
+        createUserClient.sendObject(ru);
+        userCheck = createUserClient.readObjectFromServer();
+        
+        if (userCheck != null) {
+            JOptionPane.showMessageDialog(null, "Successfully created User!");
+            Person person = (Person) userCheck;
+            MainMenu menu = new MainMenu(person);
+            menu.setVisible(true);
+            dlgCreateUser.setVisible(false);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Username already exists.");
+        }
+        createUserClient.sendObject("bye");
+    }//GEN-LAST:event_btnCreateActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        dlgCreateUser.setVisible(false);
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        confirmExit();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -191,6 +382,20 @@ public class Login extends javax.swing.JFrame {
         });
     }
     
+    private void confirmExit() {
+        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?", "Confirm Exit", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+
+            if (loginClient == null) {
+                loginClient = new MyClientSocket("127.0.0.1", 8189);
+            }
+            
+            loginClient.sendObject("shut down");
+            loginClient.close();
+            System.exit(0);
+        }
+    }
+    
     private void disableGuess()
     {
         if (test.isGuessed())
@@ -206,8 +411,17 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel UsernameLabel;
     private javax.swing.JTextField UsernameTextField;
     private javax.swing.JLabel WelcomeLabel;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnCreate;
+    private javax.swing.JButton btnCreateUser;
     private javax.swing.JButton btnLogIn;
     private javax.swing.JButton btnPlayAsGuest;
+    private javax.swing.JDialog dlgCreateUser;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblNewUser;
+    private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblUsername;
+    private javax.swing.JTextField txtPassword;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

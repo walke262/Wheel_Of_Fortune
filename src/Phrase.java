@@ -72,7 +72,7 @@ public class Phrase implements Serializable {
         int total = 0;
         for (int i = 0; i < phrase.length(); i++)
         {
-            if(phrase.charAt(i) == LetterGuess.charAt(0))
+            if(phrase.charAt(i) == LetterGuess.toUpperCase().charAt(0))
             {
                 total++;
             }
