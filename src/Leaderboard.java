@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -31,9 +34,14 @@ public class Leaderboard extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        lstLeaderboard = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Leaderboards");
 
@@ -45,12 +53,7 @@ public class Leaderboard extends javax.swing.JFrame {
 
         jLabel4.setText("Rank");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "1      iTylerJohnson                          \t", "2     \tRyanGreenGiant\t               \t", "3     \tMyManMitchDuncan\t\t", "4     \tEvenStephenClaypool", "5      \tSabrinaTheWitchHsu\t\t", "6     \tAliCatWalker\t\t\t\t" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(lstLeaderboard);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,6 +100,26 @@ public class Leaderboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        MyClientSocket client = new MyClientSocket("127.0.0.1", 8189);
+        client.sendObject("LEADERBOARD");
+        ArrayList<RegisteredUser> ru = new ArrayList<RegisteredUser>();
+        ru = (ArrayList < RegisteredUser >)client.readObjectFromServer();
+        client.sendObject("bye");
+        client.close();
+        int rank = 1;
+        lstLeaderboard.removeAll();
+        for (RegisteredUser r : ru)
+        {
+            
+            
+            lstLeaderboard.add(rank + '\t' + r.getUserName() + '\t' + r.getTotalWinnings(), this);
+            rank++;
+        }
+        
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -138,7 +161,7 @@ public class Leaderboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList lstLeaderboard;
     // End of variables declaration//GEN-END:variables
 }

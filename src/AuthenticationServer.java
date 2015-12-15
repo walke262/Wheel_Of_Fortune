@@ -155,6 +155,27 @@ public class AuthenticationServer extends MyServerSocket {
                             acceptedLoginClient.close();
                             loginServer.close();
                         }
+                        else if (message.equals("LEADERBOARD"))
+                        {
+                            ArrayList<RegisteredUser> ranking = new ArrayList<>();
+                            for (RegisteredUser r : loginRegisteredUsers)
+                            {
+                                ranking.add(r);
+                            }
+                            for (int i = 0; i<ranking.size()-1; i++)
+                            {
+                                for (int x = 1; x<ranking.size() -i; x++)
+                                {                                    
+                                    if (ranking.get(x-1).getTotalWinnings() < ranking.get(x).getTotalWinnings())
+                                    {
+                                        RegisteredUser temp = ranking.get(x-1);
+                                        ranking.set(x-1, ranking.get(i));
+                                        ranking.set(x, temp);
+                                    }
+                                }
+                            }
+                            loginServer.sendObject(ranking, acceptedLoginClient);
+                        }
                     }
                 }
             }

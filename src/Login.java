@@ -239,6 +239,7 @@ public class Login extends javax.swing.JFrame {
 //        txtGuess.setText("");
 //        disableGuess();
         Person person = new Guest();
+        this.setVisible(false);
         MainMenu menu = new MainMenu(person);
         System.out.println(person.getUserName());
         menu.setVisible(true);
