@@ -114,6 +114,7 @@ public class MainMenu extends javax.swing.JFrame {
         System.out.println(IP);
         System.out.print(port);
         System.out.print(person.getUserName());
+        this.setVisible(false);
         Game test = new Game(IP, port, person);
         test.setVisible(true);
 //        if (connection.matches("[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}:[0-9]*"))

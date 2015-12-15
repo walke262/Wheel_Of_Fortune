@@ -92,6 +92,10 @@ public class GameServer extends MyServerSocket{
                         gameServer.sendObjectToAll(gameServer.playerInfo, objectOutputStream);
 
                         if (gameServer.phrase.get(gameServer.phraseIndex).isGuessed()){
+                            if (gameServer.playerInfo[gameServer.currentPlayer] instanceof RegisteredUser)
+                            {
+                                ((RegisteredUser)gameServer.playerInfo[gameServer.currentPlayer]).setPhrasesSolved(((RegisteredUser)gameServer.playerInfo[gameServer.currentPlayer]).getPhrasesSolved() + 1);
+                            }
                             gameServer.phraseIndex++;
                             if (gameServer.phraseIndex >= gameServer.phrase.size() - 1) {
                                 int highestScore = gameServer.playerInfo[0].getCurrentBalance();
@@ -137,6 +141,26 @@ public class GameServer extends MyServerSocket{
                                         gameServer.sendObjectToAll(gameServer.phrase.get(gameServer.phraseIndex), objectOutputStream);
                                         gameServer.sendObjectToAll(gameServer.playerInfo, objectOutputStream);
                                         gameServer.sendObjectToAll("END", objectOutputStream);
+                                        
+                                        if (gameServer.playerInfo[gameServer.currentPlayer] instanceof RegisteredUser) {
+                                            ((RegisteredUser) gameServer.playerInfo[gameServer.currentPlayer]).setGamesWon(((RegisteredUser) gameServer.playerInfo[gameServer.currentPlayer]).getGamesWon()+ 1);
+                                            ((RegisteredUser) gameServer.playerInfo[gameServer.currentPlayer]).setTotalWinnings(((RegisteredUser) gameServer.playerInfo[gameServer.currentPlayer]).getTotalWinnings() + gameServer.prize.getAmount());
+                                        }
+                                        
+                                        ArrayList<RegisteredUser> ru = new ArrayList<>();
+                                        for (Person p : gameServer.playerInfo) {
+
+                                            if (p instanceof RegisteredUser) {
+                                                ((RegisteredUser) p).setGamesPlayed(((RegisteredUser) p).getGamesPlayed() + 1);
+                                                ((RegisteredUser) p).setTotalWinnings(((RegisteredUser) p).getTotalWinnings() + p.getCurrentBalance());
+                                                ru.add((RegisteredUser) p);
+                                            }
+
+                                        }
+                                        MyClientSocket client = new MyClientSocket("127.0.0.1", 8189);
+                                        client.sendObject(ru);
+                                        client.sendObject("bye");
+                                        client.close();
                                         over = true;
                                         break;
                                     }
@@ -149,6 +173,20 @@ public class GameServer extends MyServerSocket{
                                     gameServer.sendObjectToAll(gameServer.phrase.get(gameServer.phraseIndex), objectOutputStream);
                                     gameServer.sendObjectToAll(gameServer.playerInfo, objectOutputStream);
                                     gameServer.sendObjectToAll("END", objectOutputStream);
+                                    ArrayList<RegisteredUser> ru = new ArrayList<>();
+                                    for (Person p : gameServer.playerInfo) {
+
+                                        if (p instanceof RegisteredUser) {
+                                            ((RegisteredUser) p).setGamesPlayed(((RegisteredUser) p).getGamesPlayed() + 1);
+                                            ((RegisteredUser) p).setTotalWinnings(((RegisteredUser) p).getTotalWinnings() + p.getCurrentBalance());
+                                            ru.add((RegisteredUser) p);
+                                        }
+
+                                    }
+                                    MyClientSocket client = new MyClientSocket("127.0.0.1", 8189);
+                                    client.sendObject(ru);
+                                    client.sendObject("bye");
+                                    client.close();
                                     over = true;
                                 }
                             }

@@ -177,6 +177,19 @@ public class AuthenticationServer extends MyServerSocket {
                             loginServer.sendObject(ranking, acceptedLoginClient);
                         }
                     }
+                    else if (loginCredentials instanceof ArrayList)
+                    {
+                        for (RegisteredUser r : ((ArrayList<RegisteredUser>)loginCredentials))
+                        {
+                            for (int i = 0; i < loginRegisteredUsers.size(); i++)
+                            {
+                                if (loginRegisteredUsers.get(i).getUserName().equals(r.getUserName()))
+                                {
+                                    loginRegisteredUsers.set(i, r);
+                                }
+                            }
+                        }
+                    }
                 }
             }
         } catch (Exception e) {
