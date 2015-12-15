@@ -27,6 +27,10 @@ public class MainMenu extends javax.swing.JFrame {
         person = p;
         initComponents();
         lblWelcome.setText("Welcome " + p.getUserName() + "! Would you like to:");
+        if (!(p instanceof RegisteredUser))
+        {
+            btnStats.setEnabled(false);
+        }
     }
 
     /**
@@ -39,9 +43,9 @@ public class MainMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         lblWelcome = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnConnect = new javax.swing.JButton();
+        btnLeaderboard = new javax.swing.JButton();
+        btnStats = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -53,19 +57,19 @@ public class MainMenu extends javax.swing.JFrame {
 
         lblWelcome.setText("Hello %username%! Would you like to:");
 
-        jButton1.setText("Connect to Game");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnConnect.setText("Connect to Game");
+        btnConnect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnConnectActionPerformed(evt);
             }
         });
 
-        jButton2.setText("View Leaderboards");
+        btnLeaderboard.setText("View Leaderboards");
 
-        jButton3.setText("View Personal Stats");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnStats.setText("View Personal Stats");
+        btnStats.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnStatsActionPerformed(evt);
             }
         });
 
@@ -81,9 +85,9 @@ public class MainMenu extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3)
+                            .addComponent(btnConnect)
+                            .addComponent(btnLeaderboard)
+                            .addComponent(btnStats)
                             .addComponent(jLabel3))))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
@@ -93,11 +97,11 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblWelcome)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnConnect)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(btnLeaderboard)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(btnStats)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -106,7 +110,7 @@ public class MainMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
         // TODO add your handling code here:
         String connection = JOptionPane.showInputDialog("Enter an IP/URL and Port");
         String IP = connection.substring(0, connection.indexOf(':'));
@@ -122,11 +126,11 @@ public class MainMenu extends javax.swing.JFrame {
 //            JOptionPane.showMessageDialog(rootPane, "Hey, that's good.");
 //            
 //        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnConnectActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnStatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnStatsActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
@@ -169,9 +173,9 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnConnect;
+    private javax.swing.JButton btnLeaderboard;
+    private javax.swing.JButton btnStats;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblWelcome;
     // End of variables declaration//GEN-END:variables
