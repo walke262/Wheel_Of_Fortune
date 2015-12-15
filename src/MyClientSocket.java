@@ -52,6 +52,7 @@ public class MyClientSocket {
             OutputStream outStream = s.getOutputStream();
             ObjectOutputStream objectOut = new ObjectOutputStream(outStream);
             objectOut.writeObject(message);
+            objectOut.flush();
         } catch (IOException ex) {
             Logger.getLogger(MyClientSocket.class.getName()).log(Level.SEVERE, null, ex);
         }

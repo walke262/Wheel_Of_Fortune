@@ -266,9 +266,10 @@ public class Login extends javax.swing.JFrame {
         UsernameTextField.setText("");
         PassWordTextField.setText("");
 
-        ArrayList<String> login = new ArrayList<>();
-        login.add(userName);
-        login.add(password);
+        //ArrayList<String> login = new ArrayList<>();
+        String[] login = new String[2];
+        login[0] = userName;
+        login[1] = password;
         
         loginClient = new MyClientSocket("127.0.0.1", 8189);
         loginClient.sendObject(login);
@@ -280,16 +281,20 @@ public class Login extends javax.swing.JFrame {
         {
             // Person from the server, change this
             Person person = (Person) ruFromServer;
+            loginClient.sendObject("bye");
+            this.setVisible(false);
             MainMenu menu = new MainMenu(person);
             menu.setVisible(true);
             JOptionPane.showMessageDialog(null, "Login Success!");
+            
         }
         
         else {
+            loginClient.sendObject("bye");
             JOptionPane.showMessageDialog(null, "LOGIN FAILED!");
         }
         
-        loginClient.sendMessage("bye");
+        //loginClient.sendMessage("bye");
         
     }//GEN-LAST:event_btnLogInActionPerformed
 
