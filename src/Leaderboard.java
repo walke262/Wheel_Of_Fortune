@@ -1,5 +1,7 @@
 
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -53,6 +55,7 @@ public class Leaderboard extends javax.swing.JFrame {
 
         jLabel4.setText("Rank");
 
+        lstLeaderboard.setFont(new java.awt.Font("Courier New", 0, 11)); // NOI18N
         jScrollPane1.setViewportView(lstLeaderboard);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -107,17 +110,15 @@ public class Leaderboard extends javax.swing.JFrame {
         ArrayList<RegisteredUser> ru = new ArrayList<RegisteredUser>();
         ru = (ArrayList < RegisteredUser >)client.readObjectFromServer();
         client.sendObject("bye");
-        client.close();
+        client.close();        
         int rank = 1;
-        lstLeaderboard.removeAll();
+        DefaultListModel lm = new DefaultListModel();        
         for (RegisteredUser r : ru)
-        {
-            
-            
-            lstLeaderboard.add(rank + '\t' + r.getUserName() + '\t' + r.getTotalWinnings(), this);
+        {            
+            lm.addElement(rank + "     " + r.getUserName() + "     " + r.getTotalWinnings());
             rank++;
         }
-        
+        lstLeaderboard.setModel(lm);
     }//GEN-LAST:event_formWindowOpened
 
     /**
