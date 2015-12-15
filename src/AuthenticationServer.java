@@ -78,7 +78,7 @@ public class AuthenticationServer extends MyServerSocket {
                             loginVariables = (ArrayList) loginCredentials;
                                                        
                             for (int i = 0; i < loginServer.loginRegisteredUsers.size(); i++) {
-                                if (loginVariables.get(i).equalsIgnoreCase(loginServer.loginRegisteredUsers.get(i).getUserName()) && loginVariables.get(1).equalsIgnoreCase(loginServer.loginRegisteredUsers.get(i).getPassword())) {
+                                if (loginVariables.get(0).equalsIgnoreCase(loginServer.loginRegisteredUsers.get(i).getUserName()) && loginVariables.get(1).equals(loginServer.loginRegisteredUsers.get(i).getPassword())) {
                                     temp = loginServer.loginRegisteredUsers.get(i);
                                     break;
                                 }
