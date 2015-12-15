@@ -115,7 +115,7 @@ public class Leaderboard extends javax.swing.JFrame {
         DefaultListModel lm = new DefaultListModel();        
         for (RegisteredUser r : ru)
         {            
-            lm.addElement(rank + "     " + r.getUserName() + "     " + r.getTotalWinnings());
+            lm.addElement(String.format("%-2d", rank) + String.format("%-17s", r.getUserName()) + String.format("%15d", r.getTotalWinnings()));
             rank++;
         }
         lstLeaderboard.setModel(lm);
