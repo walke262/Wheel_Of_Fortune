@@ -169,7 +169,7 @@ public class AuthenticationServer extends MyServerSocket {
                                     if (ranking.get(x-1).getTotalWinnings() < ranking.get(x).getTotalWinnings())
                                     {
                                         RegisteredUser temp = ranking.get(x-1);
-                                        ranking.set(x-1, ranking.get(i));
+                                        ranking.set(x-1, ranking.get(x));
                                         ranking.set(x, temp);
                                     }
                                 }

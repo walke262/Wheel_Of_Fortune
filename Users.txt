@@ -1,5 +1,5 @@
 Sabrina	Hsu	27950	2	1	1	503021
-Stephen	Claypool	15700	2	1	1	489971
+Stephen	Claypool	15700	2	1	1	600000
 Wonder	boy	3150	1	0	0	468871
 Tyler	onepunch	0	1	0	0	0
 mitchdunc	testing	0	0	0	0	0
