@@ -135,6 +135,9 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void btnStatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatsActionPerformed
         // TODO add your handling code here:
+        ViewStats currentStats = new ViewStats();
+        currentStats.receivePerson((RegisteredUser)person);
+        currentStats.setVisible(true);
     }//GEN-LAST:event_btnStatsActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

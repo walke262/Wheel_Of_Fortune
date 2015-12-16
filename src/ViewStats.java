@@ -1,3 +1,6 @@
+
+import java.text.NumberFormat;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,6 +19,7 @@ public class ViewStats extends javax.swing.JFrame {
     public ViewStats() {
         initComponents();
     }
+    RegisteredUser currentUser;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,11 +36,12 @@ public class ViewStats extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        totalGamesPlayed = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         totalEarnings = new javax.swing.JLabel();
-        biggestWin = new javax.swing.JLabel();
+        textPhrasesSolved = new javax.swing.JLabel();
         totalGamesWon = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        totalGamesPlayed = new javax.swing.JLabel();
+        bttnBack = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -45,7 +50,11 @@ public class ViewStats extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("User Statistics");
@@ -58,48 +67,52 @@ public class ViewStats extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Biggest Win");
+        jLabel3.setText("Phrases Solved");
         jLabel3.setToolTipText("");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Total Won");
 
-        totalGamesPlayed.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        totalGamesPlayed.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        totalGamesPlayed.setText("Total Played");
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Total Played");
 
-        totalEarnings.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        totalEarnings.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         totalEarnings.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         totalEarnings.setText("$100,000");
         totalEarnings.setToolTipText("");
 
-        biggestWin.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        biggestWin.setText("$35,000");
+        textPhrasesSolved.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        textPhrasesSolved.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        textPhrasesSolved.setText("10");
 
         totalGamesWon.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         totalGamesWon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         totalGamesWon.setText("54");
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("108");
+        totalGamesPlayed.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        totalGamesPlayed.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        totalGamesPlayed.setText("108");
+
+        bttnBack.setText("Back");
+        bttnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                        .addComponent(totalGamesPlayed, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(totalEarnings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -110,9 +123,18 @@ public class ViewStats extends javax.swing.JFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(biggestWin, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(textPhrasesSolved, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
+                            .addComponent(totalGamesPlayed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(28, 28, 28))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(157, 157, 157)
+                        .addComponent(bttnBack)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,20 +148,42 @@ public class ViewStats extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(totalEarnings)
-                    .addComponent(biggestWin))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                    .addComponent(textPhrasesSolved))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(totalGamesPlayed)
+                    .addComponent(jLabel10)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(totalGamesWon)
-                    .addComponent(jLabel9))
-                .addGap(38, 38, 38))
+                    .addComponent(totalGamesPlayed))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bttnBack)
+                .addGap(15, 15, 15))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        
+        double currentEarnings = (double)currentUser.getTotalWinnings();
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+        String earningsString = formatter.format(currentEarnings);
+        
+        this.totalEarnings.setText(earningsString);
+        this.totalGamesPlayed.setText(Integer.toString(currentUser.getGamesPlayed()));
+        this.totalGamesWon.setText(Integer.toString(currentUser.getGamesWon()));
+        this.textPhrasesSolved.setText(Integer.toString(currentUser.getPhrasesSolved()));
+
+    }//GEN-LAST:event_formWindowOpened
+
+    private void bttnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnBackActionPerformed
+        // TODO add your handling code here:
+        
+        this.setVisible(false);
+    }//GEN-LAST:event_bttnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,16 +219,22 @@ public class ViewStats extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void receivePerson(RegisteredUser person){
+        currentUser = person;
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel biggestWin;
+    private javax.swing.JButton bttnBack;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel textPhrasesSolved;
     private javax.swing.JLabel totalEarnings;
     private javax.swing.JLabel totalGamesPlayed;
     private javax.swing.JLabel totalGamesWon;
