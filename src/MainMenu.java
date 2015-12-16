@@ -65,6 +65,11 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         btnLeaderboard.setText("View Leaderboards");
+        btnLeaderboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLeaderboardActionPerformed(evt);
+            }
+        });
 
         btnStats.setText("View Personal Stats");
         btnStats.addActionListener(new java.awt.event.ActionListener() {
@@ -136,6 +141,12 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_formWindowClosed
+
+    private void btnLeaderboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeaderboardActionPerformed
+        // TODO add your handling code here:
+        Leaderboard newLeaderBoard = new Leaderboard();
+        newLeaderBoard.setVisible(true);
+    }//GEN-LAST:event_btnLeaderboardActionPerformed
     
     /**
      * @param args the command line arguments

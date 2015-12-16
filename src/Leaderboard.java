@@ -48,6 +48,11 @@ public class Leaderboard extends javax.swing.JFrame {
         jLabel1.setText("Leaderboards");
 
         BackButton.setText("Back");
+        BackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("UserName");
 
@@ -120,6 +125,11 @@ public class Leaderboard extends javax.swing.JFrame {
         }
         lstLeaderboard.setModel(lm);
     }//GEN-LAST:event_formWindowOpened
+
+    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_BackButtonActionPerformed
 
     /**
      * @param args the command line arguments
