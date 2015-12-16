@@ -1,4 +1,8 @@
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -7,6 +11,8 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -36,6 +42,7 @@ public class GameServer extends MyServerSocket{
         try {
             System.out.println("Game Server");
             GameServer gameServer = new GameServer(1337);
+            FileReader fileReader = null;
             String stringFromClient;
             boolean isSpun;
             boolean isCorrect = false;
@@ -46,6 +53,53 @@ public class GameServer extends MyServerSocket{
             ObjectInputStream[] objectInputStream = new ObjectInputStream[3];
             ObjectOutputStream[] objectOutputStream = new ObjectOutputStream[3];
             Object gameClientObjects = "";
+            File f = new File("./Phrases.txt");
+
+            // Load in some phrases
+            try {
+                ArrayList<Phrase> tempA = new ArrayList<>();
+                if (f.exists()) {
+                    fileReader = new FileReader(f);
+                    String line;
+                    BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+                    //Loads the file into the arrayList
+                    while ((line = bufferedReader.readLine()) != null) {
+                        Phrase p = new Phrase();
+                        p.deSerialize(line);
+                        tempA.add(p);
+                    }
+                    bufferedReader.close();
+                    fileReader.close();
+                    System.out.println("Finished reading file...");
+                }
+                
+                // Choose the phrases randomly
+                for (int i = 0; i < 5; i++)
+                {
+                    int index = gameServer.random.nextInt(tempA.size()-1);
+                    gameServer.phrase.add(tempA.get(index));
+                    tempA.remove(index);
+                }
+
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(AuthenticationServer.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(AuthenticationServer.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                if (fileReader != null) {
+                    try {
+                        fileReader.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(AuthenticationServer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+            
+            for (Phrase p : gameServer.phrase)
+            {
+                System.out.println(p.getPhrase());
+            }
             
             for (int i = 0; i < 3; i++) {
                 acceptedClient[i] = gameServer.acceptingConnection();
@@ -56,8 +110,9 @@ public class GameServer extends MyServerSocket{
                 gameServer.playerInfo[i] = (Person)gameServer.receiveObject(objectInputStream[i]);
             }
             
-            gameServer.phrase.add(new Phrase("The early bird gets the worm", "Phrase"));
-            gameServer.phrase.add(new Phrase("Chicken and rice", "On the menu"));
+
+            //gameServer.phrase.add(new Phrase("The early bird gets the worm", "Phrase"));
+            //gameServer.phrase.add(new Phrase("Chicken and rice", "On the menu"));
             
             for (Person p : gameServer.playerInfo)
             {

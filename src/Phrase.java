@@ -18,6 +18,13 @@ public class Phrase implements Serializable {
     private String lettersGuessed;
     private boolean guessed = false;
 
+    public Phrase() {
+        phrase = "";
+        category = "";
+        lettersGuessed = "";
+        guessed = false;
+    }
+
     public Phrase(String phrase, String category) {
         phrase = phrase.toUpperCase();
         category = category.toUpperCase();
@@ -150,6 +157,18 @@ public class Phrase implements Serializable {
             //JOptionPane.showMessageDialog(null, "Unfortunately your guess: \"" + guess + "\" was incorrect.");
             return false;
         }
+    }
+    
+    public String serlialize()
+    {
+        return phrase + "\t" + category;
+    }
+    
+    public void deSerialize(String input)
+    {
+        String[] line = input.split("\t");
+        phrase = line[0].toUpperCase();
+        category = line[1].toUpperCase();
     }
     
 }

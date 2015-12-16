@@ -3,10 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/Game.java</file>
+            <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/MainMenu.java</file>
+            <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/Prize.java</file>
+            <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/Person.java</file>
             <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/AuthenticationServer.java</file>
+            <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/Leaderboard.java</file>
+            <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/GameServer.java</file>
             <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/Login.java</file>
             <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/MyClientSocket.java</file>
+            <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/RegisteredUser.java</file>
             <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/MyServerSocket.java</file>
+            <file>file:/G:/Colig/Documents/Wheel_Of_Fortune/src/ViewStats.java</file>
         </group>
     </open-files>
 </project-private>
