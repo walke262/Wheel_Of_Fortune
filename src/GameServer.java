@@ -116,6 +116,7 @@ public class GameServer extends MyServerSocket{
             
             for (Person p : gameServer.playerInfo)
             {
+                p.setCurrentBalance(0);
                 System.out.println(p.getUserName());
             }
             gameServer.sendObjectToAll(gameServer.playerInfo, objectOutputStream);

@@ -21,7 +21,6 @@ public class Phrase implements Serializable {
     public Phrase() {
         phrase = "";
         category = "";
-        lettersGuessed = "";
         guessed = false;
     }
 
